@@ -31,7 +31,8 @@ class User extends Authenticatable
         'role_id',
         'password',
         'remember_token',
-        'email_verfied_at',
+        'email_verified_at',
+        'deleted',
     ];
 
     // Simple casts

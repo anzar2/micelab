@@ -24,7 +24,7 @@ return new class extends Migration
 
         Schema::create('test_case', function (Blueprint $table) {
             $table->Ulid('id')->primary();
-            $table->string('descriptive_id');
+            $table->string('descriptive_id')->nullable();
             $table->string('title');
             $table->string('description');
             $table->string('steps');

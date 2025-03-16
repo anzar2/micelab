@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Observers\TestCaseObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use \Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ObservedBy([TestCaseObserver::class])]
 class TestCase extends Model
 {
     use HasUlids;
@@ -53,6 +56,10 @@ class TestCase extends Model
             get: fn($value) => unserialize($value),
             set: fn($value) => serialize($value),
         );
+    }
+
+    public function projectTask(): BelongsTo {
+        return $this->belongsTo(ProjectTask::class, "task_id");
     }
 
     public function testType(): BelongsTo {

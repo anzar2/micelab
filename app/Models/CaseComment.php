@@ -15,16 +15,18 @@ class CaseComment extends Model
         "parent_id",
     ];
 
+    protected $hidden = ["parent_id", "user_id"]; 
+
     protected $casts = [
         "created_at"=> "datetime",
         "updated_at"=> "datetime",
     ];
 
     public function user(): BelongsTo {
-        return $this->belongsTo(User::class, "id");
+        return $this->belongsTo(User::class, "user_id");
     }
 
-    public function parent(): BelongsTo {
-        return $this->belongsTo(CaseComment::class, "parent_id");
+    public function replies() {
+        return $this->hasMany(CaseComment::class, "parent_id");
     }
 }

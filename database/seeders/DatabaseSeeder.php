@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear un rol de usuario
         \DB::table('user_roles')->insert([
             [
                 'role' => 'admin',
@@ -108,7 +107,6 @@ class DatabaseSeeder extends Seeder
             ['status' => 'skipped'],
         ]);
 
-        // Crear un usuario
         $user = User::create([
             'first_name' => 'John',
             'last_name' => 'Doe',
@@ -118,7 +116,6 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
         ]);
 
-        // Crear un proyecto
         $project = Project::create([
             'project_name' => 'Project Alpha',
             'description' => 'Test project',
@@ -135,15 +132,12 @@ class DatabaseSeeder extends Seeder
             'project_id' => $project->id,
         ]);
 
-        // Asignar un usuario a la tarea
         TaskAssignees::create([
             'task_id' => $task->id,
             'user_id' => $user->id,
         ]);
 
-        // Crear un caso de prueba
         $testCase = TestCase::create([
-            'descriptive_id' => 'TC001',
             'title' => 'Test Case 1',
             'description' => 'Test case description',
             'steps' => ['Step 1', 'Step 2', 'Step 3'],
@@ -164,13 +158,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CaseComment::create([
-            'comment' => 'This is another comment from the same user. but is reponsed to the first comment.',
+            'comment' => 'This is another comment on the test case. But is a reply.',
+            'user_id' => $user->id,
+            'test_case_id' => $testCase->id,
+            'parent_id'=> $parent->id
+        ]);
+        CaseComment::create([
+            'comment' => 'Another reply.',
             'user_id' => $user->id,
             'test_case_id' => $testCase->id,
             'parent_id'=> $parent->id
         ]);
 
-        // Crear un informe de error (bug report)
+        CaseComment::create([
+            'comment' => 'This is another comment',
+            'user_id' => $user->id,
+            'test_case_id' => $testCase->id,
+        ]);
+
         BugReport::create([
             'title' => 'Bug in task',
             'description' => 'Bug found in task execution',
