@@ -18,8 +18,6 @@ class UserObserver
             'language'=> 'en',
             'timezone'=> 417,
         ]);
-        $user->user_preferences = $default->id;
-        $user->save();
     }
 
     /**
