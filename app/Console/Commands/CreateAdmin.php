@@ -40,7 +40,7 @@ class CreateAdmin extends Command
             'password' => Hash::make($password),
             'username' => $username
         ]);
-        $user->is_admin = UserRole::find(1);
+        $user->role_id = UserRole::find(1);
         $user->save();
         $this->info('Admin user created successfully: ' . $user->email);
         
