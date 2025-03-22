@@ -21,7 +21,7 @@ class ExampleDataSeeder extends Seeder
     public function run(): void
     {
         // Generate development data on development mode
-        if (config('app.env') === 'local') { {
+        if (config('app.example_insert')) { {
                 $user_1 = User::create([
                     'first_name' => 'John',
                     'last_name' => 'Doe',

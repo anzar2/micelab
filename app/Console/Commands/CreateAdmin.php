@@ -28,21 +28,25 @@ class CreateAdmin extends Command
      */
     public function handle()
     {
-        $first_name = $this->argument('first_name');
-        $last_name = $this->argument('last_name');
-        $email = $this->argument('email');
-        $password = $this->argument('password');
-        $username = $this->argument('username');
-        $user = User::create([
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-            'password' => Hash::make($password),
-            'username' => $username
-        ]);
-        $user->role_id = 1;
-        $user->save();
-        $this->info('Admin user created successfully: ' . $user->email);
-        
+        try {
+            $first_name = $this->argument('first_name');
+            $last_name = $this->argument('last_name');
+            $email = $this->argument('email');
+            $password = $this->argument('password');
+            $username = $this->argument('username');
+            $user = User::create([
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+                'password' => Hash::make($password),
+                'username' => $username
+            ]);
+            $user->role_id = 1;
+            $user->save();
+            $this->info('Admin user created successfully: ' . $user->email);
+        } catch (\Exception $e) {
+            fwrite(STDERR, $e->getMessage() . PHP_EOL);
+        }
+
     }
 }

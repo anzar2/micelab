@@ -27,10 +27,15 @@ class CreateTeam extends Command
      */
     public function handle()
     {
-        $team_arg = $this->argument('team_name');
-        $team =Team::create([
-            'name' => $team_arg,
-        ]);
-        $this->info('Team created successfully: ' . $team->name);
+        try {
+            $team_arg = $this->argument('team_name');
+            $team = Team::create([
+                'name' => $team_arg,
+            ]);
+            $this->info('Team created successfully: ' . $team->name);
+        }
+         catch (\Exception $e) {
+            fwrite(STDERR, $e->getMessage() . PHP_EOL);
+        }
     }
 }

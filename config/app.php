@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'example_insert' => (bool) env('EXAMPLE_INSERT', false),
+
 ];
