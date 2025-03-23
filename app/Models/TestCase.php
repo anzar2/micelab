@@ -19,7 +19,6 @@ class TestCase extends Model
         "title",
         "description",
         "steps",
-        "expected_behaviour",
         "obtained_result",
         "test_comments",
         'is_published',

@@ -54,6 +54,7 @@ class ExampleDataSeeder extends Seeder
                     'name' => 'Task 1',
                     'module_id' => $module->id,
                     'project_id' => $project->id,
+                    'expected_flow' => ['Expected behaviour 1', 'Expected behaviour 2'],
                 ]);
 
                 TaskAssignees::create([
@@ -65,9 +66,8 @@ class ExampleDataSeeder extends Seeder
                     'title' => 'Test Case 1',
                     'description' => 'Test case description',
                     'steps' => ['Step 1', 'Step 2', 'Step 3'],
-                    'expected_behaviour' => 'Expected result',
                     'obtained_result' => 'Obtained result',
-                    'test_comments' => 'Initial comment',
+                    'test_comments' => 'This test has been done.',
                     'is_published' => false,
                     'created_by' => $user_1->id,
                     'task_id' => $task->id,

@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('steps');
-            $table->string('expected_behaviour');
             $table->string('obtained_result');
             $table->text('test_comments')->nullable();
             $table->boolean('is_published')->default(false);
