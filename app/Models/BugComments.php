@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BugComments extends Model
 {   
-    public static $subject_name = "tc_comment";
     protected $table = "bug_report_comments";
     protected $fillable = [
         "comment",

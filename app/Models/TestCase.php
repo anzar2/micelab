@@ -15,7 +15,6 @@ class TestCase extends Model
 {
     use HasUlids;
     protected $table = "test_case";
-    protected $subject_name = "test_case";
 
     protected $fillable = [
         "descriptive_id",

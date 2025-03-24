@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CaseComment extends Model
 {
-    protected $subject_name = "tc_comment";
     protected $table = "test_case_comments";
    
 
