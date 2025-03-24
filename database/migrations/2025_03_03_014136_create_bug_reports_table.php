@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('bug_reports', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('title');
-            $table->string('description');
-            $table->string('steps_to_reproduce')->default("");
+            $table->text('description');
+            $table->text('steps_to_reproduce')->default("");
             $table->timestamps();
             $table->foreignUlid('requirement_id')->nullable()->constrained('project_requirements')->onDelete('set null');
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');

@@ -32,8 +32,8 @@ return new class extends Migration {
         Schema::create('project_requirements', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->string('expected_flow')->default("");
+            $table->text('description')->nullable();
+            $table->text('expected_flow')->default("");
             $table->foreignUuid('module_id')->nullable()->constrained('project_modules')->onDelete('set null');
             $table->boolean('deleted')->default(false);
             $table->timestamp('deleted_at')->nullable();

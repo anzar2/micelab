@@ -26,16 +26,16 @@ return new class extends Migration
             $table->Ulid('id')->primary();
             $table->string('descriptive_id')->nullable();
             $table->string('title');
-            $table->string('description');
-            $table->string('steps');
-            $table->string('obtained_result');
+            $table->text('description');
+            $table->text('steps');
+            $table->text('obtained_result');
             $table->text('test_comments')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->integer('duration_in_seconds')->nullable();
             $table->string('test_version')->nullable();
-            $table->string('pre_conditions')->nullable();
+            $table->text('pre_conditions')->nullable();
             $table->boolean('is_automated')->nullable();
             $table->boolean('deleted')->default(false);
 
