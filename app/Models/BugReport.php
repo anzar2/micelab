@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 
 class BugReport extends Model
-{    protected $table = "bug_reports";
+{
+    protected $table = "bug_reports";
     protected $fillable = [
         "title",
         "description",
