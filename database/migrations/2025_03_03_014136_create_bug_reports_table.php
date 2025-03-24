@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->text('steps_to_reproduce')->default("");
+            $table->text('steps_to_reproduce');
             $table->timestamps();
             $table->foreignUlid('requirement_id')->nullable()->constrained('project_requirements')->onDelete('set null');
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');

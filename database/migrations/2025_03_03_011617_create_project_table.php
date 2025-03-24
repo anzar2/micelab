@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->text('expected_flow')->default("");
+            $table->text('expected_flow');
             $table->foreignUuid('module_id')->nullable()->constrained('project_modules')->onDelete('set null');
             $table->boolean('deleted')->default(false);
             $table->timestamp('deleted_at')->nullable();
