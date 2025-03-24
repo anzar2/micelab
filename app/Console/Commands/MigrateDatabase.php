@@ -39,8 +39,11 @@ class MigrateDatabase extends Command
             \Artisan::call('migrate', ["--force" => true]);
             fwrite(STDOUT,'Database migrated successfully');
         } catch (\Exception $e) {
-    
-            fwrite(STDERR, $e->getMessage() . PHP_EOL . "\nThis kind of error may indicate a bad installation. Run mlab 'reinstall' to make a fresh installation.");
+            \Artisan::call("db:wipe", ["--force"=> true]);
+            if (file_exists(base_path(".env"))) {
+                unlink(base_path(".env"));
+            }
+            fwrite(STDERR, $e->getMessage() . PHP_EOL . "\nAll actions has been rolled back");
         }
     }
 }

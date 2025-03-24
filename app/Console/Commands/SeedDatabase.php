@@ -39,7 +39,11 @@ class SeedDatabase extends Command
             \Artisan::call('db:seed', ['--force' => true]);
             fwrite(STDOUT,'Database seeded successfully');
         } catch (\Exception $e) {
-            fwrite(STDERR, $e->getMessage() . PHP_EOL);
+            \Artisan::call("db:wipe", ["--force"=> true]);
+            if (file_exists(base_path(".env"))) {
+                unlink(base_path(".env"));
+            }
+            fwrite(STDERR, $e->getMessage() . PHP_EOL . "\nAll actions has been rolled back");
         }
     }
 }

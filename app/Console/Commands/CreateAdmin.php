@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use Hash;
 use Illuminate\Console\Command;
+use League\Uri\Encoder;
 
 class CreateAdmin extends Command
 {
@@ -39,13 +40,17 @@ class CreateAdmin extends Command
                 'last_name' => $last_name,
                 'email' => $email,
                 'password' => Hash::make($password),
-                'username' => $username
+                'username' => $username,
+                'global_role' => 3
             ]);
-            $user->role_id = 1;
-            $user->save();
-            $this->info('Admin user created successfully: ' . $user->email);
+
+            fwrite(STDOUT,sprintf("User created successfully\nID: %s\nFirst name: %s\nLast name: %s\nUsername: %s\nEmail: %s\nGlobal_Role: %s", $user->id, $user->username, $user->first_name, $user->last_name, $user->email, $user->globalRole->name));
         } catch (\Exception $e) {
-            fwrite(STDERR, $e->getMessage() . PHP_EOL);
+            \Artisan::call("db:wipe", ["--force"=> true]);
+            if (file_exists(base_path(".env"))) {
+                unlink(base_path(".env"));
+            }
+            fwrite(STDERR, $e->getMessage() . PHP_EOL . "\nAll actions has been rolled back");
         }
 
     }

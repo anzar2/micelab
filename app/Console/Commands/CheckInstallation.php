@@ -22,15 +22,18 @@ class CheckInstallation extends Command
 
     /**
      * Execute the console command.
+     * 
+     * This should be more robust in the future
+     * - anzar2
      */
     public function handle()
     {
         try {
             if (\DB::table('migrations')->first() != null) {
-                fwrite(STDERR,'[Error] App is already installed. The inslatation process has been aborted.');
+                fwrite(STDERR,'[Error] An installation has been detected. Process has been aborted.');
             }
         } catch (\Exception $e) {
-            fwrite(STDOUT,'Migrations not found.');
+            fwrite(STDOUT,"Installation not found.\nStarting installation...");
         }
     }
 }

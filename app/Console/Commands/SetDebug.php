@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class SetDevelopment extends Command
+class SetDebug extends Command
 {
     /**
      * The name and signature of the console command.
@@ -34,7 +34,7 @@ class SetDevelopment extends Command
             \Artisan::call('cache:clear');
             \Artisan::call('config:cache');
 
-            fwrite(STDOUT,'Development mode enabled');
+            fwrite(STDOUT,'Debug mode enabled');
             return;
         }
 
