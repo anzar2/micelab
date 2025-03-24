@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TestStatus;
 use Illuminate\Database\Seeder;
 
 class TestStatusSeeder extends Seeder
@@ -12,7 +12,7 @@ class TestStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('test_status')->insert([
+        TestStatus::insert([
             ['status' => 'pending'],
             ['status' => 'passed'],
             ['status' => 'failed'],

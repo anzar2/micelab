@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
-class CaseComment extends Model
-{
-    protected $subject_name = "tc_comment";
-    protected $table = "test_case_comments";
-   
-
+class BugComments extends Model
+{   
+    public static $subject_name = "tc_comment";
+    protected $table = "bug_report_comments";
     protected $fillable = [
         "comment",
         "user_id",
-        "test_case_id",
+        "bug_report_id",
         "parent_id",
     ];
 
@@ -32,6 +29,6 @@ class CaseComment extends Model
     }
 
     public function replies() {
-        return $this->hasMany(CaseComment::class, "parent_id")->with('replies');
+        return $this->hasMany( BugComments::class, "parent_id")->with('replies');
     }
 }

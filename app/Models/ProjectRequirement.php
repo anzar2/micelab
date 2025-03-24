@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class ProjectTask extends Model
+class ProjectRequirement extends Model
 {
     use HasUlids;
-
-    protected $table = "project_tasks";
+ 
+    protected $table = "project_requirements";
     protected $fillable = [
         'name',
         'description',
@@ -31,18 +31,28 @@ class ProjectTask extends Model
         'deleted_at'=> 'datetime',
         'deleted'=> 'boolean',
     ];
-    public function projectModule(): BelongsTo {
+    public function module(): BelongsTo {
         return $this->belongsTo(ProjectModule::class, 'module_id');
+    }
+
+    public function project(): BelongsTo {
+        return $this->belongsTo(Project::class,'project_id');
     }
     
     public function assignees(): HasMany {
-        return $this->hasMany(TaskAssignees::class, 'task_id');
+        return $this->hasMany(RequirementAssignees::class, 'requirement_id');
     }
 
     public function expectedFlow(): Attribute {
         return Attribute::make(
-            set: fn ($value) => serialize($value),
-            get: fn ($value) => unserialize($value),
+            set: fn (array $value) => serialize($value),
+            get: fn (string $value) => $value ? unserialize($value) : [],
         );
     }
+
+    public function activityLogs(): MorphMany
+    {
+        return $this->morphMany(ActivityLog::class, 'subject');
+    }
 }
+

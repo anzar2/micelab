@@ -9,15 +9,9 @@ class UserRole extends Model
     protected $table = "user_roles";
     public $timestamps = false;
     protected $hidden = [
-        'id',
-        'can_create_project',
-        'can_delete_project',
-        'can_manage_users'
+        'id'
     ];
     protected $guarded = [
-        'privilege_name',
-        'can_create_project',
-        'can_delete_project',
-        'can_manage_users'
+        'name'
     ];
 }

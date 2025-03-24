@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TestType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +13,7 @@ class TestTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        \DB::table('test_type')->insert([
+        TestType::insert([
             [
                 'name' => 'unit-test',
                 'is_custom' => false,

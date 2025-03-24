@@ -40,7 +40,7 @@ return new class extends Migration
             $table->boolean('deleted')->default(false);
 
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignUlid('task_id')->nullable()->constrained('project_tasks')->onDelete('cascade');
+            $table->foreignUlid('requirement_id')->nullable()->constrained('project_requirements')->onDelete('cascade');
             $table->foreignId('test_type')->nullable()->constrained('test_type')->onDelete('set null');            
             $table->foreignId('test_status')->nullable()->constrained('test_status')->onDelete('set null'); 
         });

@@ -13,10 +13,7 @@ return new class extends Migration {
 
         Schema::create("user_roles", function (Blueprint $table) {
             $table->id();
-            $table->string('role');
-            $table->boolean("can_create_project");
-            $table->boolean("can_delete_project");
-            $table->boolean("can_manage_users");
+            $table->string('name');
         });
 
         Schema::create('users', function (Blueprint $table) {
@@ -31,7 +28,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->boolean('deleted')->default(false);
-            $table->foreignId('role_id')->nullable()->constrained('user_roles')->onDelete('set null');
+            $table->foreignId('global_role')->nullable()->constrained('user_roles')->onDelete('set null');
         });
 
         Schema::create('themes', function (Blueprint $table) {
@@ -89,6 +86,7 @@ return new class extends Migration {
         Schema::dropIfExists('timezones');
         Schema::dropIfExists('languages');
         Schema::dropIfExists('themes');
+        Schema::dropIfExists('user_roles');
         Schema::dropIfExists('users');
     }
 };

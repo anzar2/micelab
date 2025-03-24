@@ -28,6 +28,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'global_role',
     ];
     // Hidden fields on JSON responses
     protected $hidden = [
@@ -38,6 +39,8 @@ class User extends Authenticatable
         'user_preferences',
         'deleted',
     ];
+
+    protected $guarded = ['global_role'];
 
     // Simple casts
     protected function casts(): array
@@ -67,8 +70,8 @@ class User extends Authenticatable
     }
 
     // Relations
-    public function privileges(): BelongsTo {
-        return $this->belongsTo(UserRole::class, 'role_id');
+    public function globalRole(): BelongsTo {
+        return $this->belongsTo(UserRole::class, 'global_role');
     }
 
     public function preferences (): BelongsTo {

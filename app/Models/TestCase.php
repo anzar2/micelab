@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
 #[ObservedBy([TestCaseObserver::class])]
 class TestCase extends Model
 {
     use HasUlids;
     protected $table = "test_case";
+    protected $subject_name = "test_case";
+
     protected $fillable = [
         "descriptive_id",
         "title",
@@ -27,7 +30,7 @@ class TestCase extends Model
         "pre_conditions",
         "is_automated",
         "created_by",
-        "task_id",
+        "requirement_id",
         "test_type",
         "test_status",
     ];
@@ -58,7 +61,7 @@ class TestCase extends Model
     }
 
     public function projectTask(): BelongsTo {
-        return $this->belongsTo(ProjectTask::class, "task_id");
+        return $this->belongsTo(ProjectRequirement::class, "requirement_id");
     }
 
     public function testType(): BelongsTo {

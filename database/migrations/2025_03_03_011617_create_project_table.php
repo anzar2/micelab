@@ -29,11 +29,11 @@ return new class extends Migration {
             $table->foreignUlid('project_id')->constrained('projects')->onDelete('cascade');
         });
 
-        Schema::create('project_tasks', function (Blueprint $table) {
+        Schema::create('project_requirements', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('expected_flow')->nullable();
+            $table->string('expected_flow')->default(serialize([]));
             $table->foreignUuid('module_id')->nullable()->constrained('project_modules')->onDelete('set null');
             $table->boolean('deleted')->default(false);
             $table->timestamp('deleted_at')->nullable();
@@ -41,9 +41,9 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('tasks_assignees', function (Blueprint $table) {
+        Schema::create('requirements_assignees', function (Blueprint $table) {
             $table->id();
-            $table->foreignUlid('task_id')->constrained('project_tasks')->onDelete('cascade');
+            $table->foreignUlid('requirement_id')->constrained('project_requirements')->onDelete('cascade');
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
         });
     }
@@ -54,7 +54,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('tasks_assignees');
-        Schema::dropIfExists('project_tasks');
+        Schema::dropIfExists('project_requirements');
         Schema::dropIfExists('project_modules');
         Schema::dropIfExists('projects');
     }

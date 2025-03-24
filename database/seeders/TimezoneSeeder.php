@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Timezone;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,6 @@ class TimezoneSeeder extends Seeder
         foreach (\DateTimeZone::listIdentifiers() as $key => $timezone) {
             $timezones[] = ['code' => (int)$key,'name'=> str_replace("_"," ", $timezone)];
         }
-        \DB::table("timezones")->insert($timezones);
+        Timezone::insert($timezones);
     }
 }

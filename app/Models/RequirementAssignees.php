@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TaskAssignees extends Model
+class RequirementAssignees extends Model
 {
-    protected $table = "tasks_assignees";
+    protected $table = "requirements_assignees";
     public $timestamps = false;
     protected $fillable = [
-        "task_id",
+        "requirement_id",
         "user_id",
     ];
 
     protected $hidden = [
         "id",
-        "task_id",
+        "requirement_id",
         "user_id",
     ];
 
@@ -24,6 +24,7 @@ class TaskAssignees extends Model
         return $this->belongsTo(User::class, "user_id");
     }
     public function projectTask(): BelongsTo {
-        return $this->belongsTo(ProjectTask::class,"task_id");
+        return $this->belongsTo(ProjectRequirement::class,"requirement_id");
     }
 }
+
