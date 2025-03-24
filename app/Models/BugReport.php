@@ -26,8 +26,8 @@ class BugReport extends Model
 
     public function stepsToReproduce(): Attribute {
         return Attribute::make(
-            get: fn($value) => unserialize($value),
-            set: fn($value) => serialize($value),
+            get: fn($value) => json_decode($value),
+            set: fn($value) => json_encode($value),
         );
     }
 }

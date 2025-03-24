@@ -45,8 +45,8 @@ class ProjectRequirement extends Model
 
     public function expectedFlow(): Attribute {
         return Attribute::make(
-            set: fn (array $value) => serialize($value),
-            get: fn (string $value) => $value ? unserialize($value) : [],
+            set: fn (array $value) => json_encode($value),
+            get: fn (string $value) => json_decode($value),
         );
     }
 

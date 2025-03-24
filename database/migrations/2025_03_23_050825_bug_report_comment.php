@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('comment');
             $table->timestamps();
-            $table->foreignUuid('user_id')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignUlid('bug_report_id')->references('id')->on('bug_reports')->onDelete('cascade');
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUlid('bug_report_id')->constrained('bug_reports')->onDelete('cascade');
             $table->foreignId('parent_id')->nullable()->constrained('bug_report_comments')->onDelete('set null');
         });
     }
