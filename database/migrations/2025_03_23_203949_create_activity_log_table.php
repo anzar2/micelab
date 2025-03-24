@@ -18,6 +18,10 @@ return new class extends Migration
             $table->foreignUuid('by')->constrained('users')->onDelete('cascade');
             $table->timestamp('when')->useCurrent();
         });
+
+        Schema::table('activity_log', function (Blueprint $table) {
+            $table->string('subject_id')->change();
+        });
     }
 
     /**
