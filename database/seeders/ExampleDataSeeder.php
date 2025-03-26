@@ -30,7 +30,7 @@ class ExampleDataSeeder extends Seeder
                     'username' => 'johndoe',
                     'email' => 'johndoe@example.com',
                     'password' => 'password',
-                    'global_role' => 1,
+                    'global_role' => "developer",
                 ]);
 
                 $user_2 = User::create([
@@ -39,7 +39,7 @@ class ExampleDataSeeder extends Seeder
                     'username' => 'saradoe',
                     'email' => 'saradoe@example.com',
                     'password' => 'password',
-                    'global_role' => 1,
+                    'global_role' => "developer",
                 ]);
 
                 $project = Project::create([
@@ -50,13 +50,13 @@ class ExampleDataSeeder extends Seeder
                 UsersProjects::create([
                     'user_id' => $user_1->id,
                     'project_id' => $project->id,
-                    'role_in_project' => 1,
+                    'role_in_project' => "developer",
                 ]);
 
                 UsersProjects::create([
                     'user_id' => $user_2->id,
                     'project_id' => $project->id,
-                    'role_in_project' => 2,
+                    'role_in_project' => "admin",
                 ]);
 
                 $module = ProjectModule::create([

@@ -41,7 +41,7 @@ class CreateAdmin extends Command
                 'email' => $email,
                 'password' => Hash::make($password),
                 'username' => $username,
-                'global_role' => 3
+                'global_role' => "owner",
             ]);
 
             fwrite(STDOUT,sprintf("User created successfully\nID: %s\nFirst name: %s\nLast name: %s\nUsername: %s\nEmail: %s\nGlobal_Role: %s", $user->id, $user->username, $user->first_name, $user->last_name, $user->email, $user->globalRole->name));

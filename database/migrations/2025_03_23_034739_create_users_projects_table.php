@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignUlid('project_id')->constrained('projects')->onDelete('cascade');
-            $table->foreignId('role_in_project')->constrained('user_roles')->onDelete('cascade');
-
+            $table->string('role_in_project')->nullable();
+            $table->foreign("role_in_project")->references('name')->on('user_roles')->onDelete('set null');
         });
     }
 

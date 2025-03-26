@@ -12,8 +12,7 @@ return new class extends Migration {
     {
 
         Schema::create("user_roles", function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->string('name')->primary();
         });
 
         Schema::create('users', function (Blueprint $table) {
@@ -28,7 +27,8 @@ return new class extends Migration {
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->boolean('deleted')->default(false);
-            $table->foreignId('global_role')->nullable()->constrained('user_roles')->onDelete('set null');
+            $table->string('global_role')->nullable();
+            $table->foreign("global_role")->references('name')->on('user_roles')->onDelete('set null');
         });
 
         Schema::create('themes', function (Blueprint $table) {

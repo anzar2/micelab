@@ -32,7 +32,7 @@ class User extends Authenticatable
     ];
     // Hidden fields on JSON responses
     protected $hidden = [
-        'role_id',
+        'global_role',
         'password',
         'remember_token',
         'email_verified_at',
@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     // Relations
     public function globalRole(): BelongsTo {
-        return $this->belongsTo(UserRole::class, 'global_role');
+        return $this->belongsTo(UserRole::class, 'global_role', 'name');
     }
 
     public function preferences (): BelongsTo {
