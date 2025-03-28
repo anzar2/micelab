@@ -17,17 +17,16 @@ return new class extends Migration {
 
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('username');
-            $table->string('email')->unique();
+            $table->string('display_name');
+            $table->string('username')->unique();
+            $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->boolean('deleted')->default(false);
-            $table->string('global_role')->nullable();
+            $table->string('global_role')->default("developer");
             $table->foreign("global_role")->references('name')->on('user_roles')->onDelete('set null');
         });
 
