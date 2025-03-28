@@ -15,7 +15,7 @@ class UserObserver
         $default = UserPreference::create([
             "user_id"=> $user->id,
             "theme"=> 'auto',
-            'language'=> 'en',
+            'language'=> env('APP_LOCALE', 'en'),
             'timezone'=> 417,
         ]);
     }
