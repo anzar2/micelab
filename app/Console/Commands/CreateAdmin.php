@@ -15,7 +15,7 @@ class CreateAdmin extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-admin {first_name} {last_name} {email} {password} {username}';
+    protected $signature = 'app:create-admin {display_name} {email} {password} {username}';
 
     /**
      * The console command description.
@@ -30,21 +30,19 @@ class CreateAdmin extends Command
     public function handle()
     {
         try {
-            $first_name = $this->argument('first_name');
-            $last_name = $this->argument('last_name');
+            $display_name = $this->argument('display_name');
             $email = $this->argument('email');
             $password = $this->argument('password');
             $username = $this->argument('username');
             $user = User::create([
-                'first_name' => $first_name,
-                'last_name' => $last_name,
+                'display_name' => $display_name,
                 'email' => $email,
                 'password' => Hash::make($password),
                 'username' => $username,
                 'global_role' => "owner",
             ]);
 
-            fwrite(STDOUT,sprintf("User created successfully\nID: %s\nFirst name: %s\nLast name: %s\nUsername: %s\nEmail: %s\nGlobal_Role: %s", $user->id, $user->username, $user->first_name, $user->last_name, $user->email, $user->globalRole->name));
+            fwrite(STDOUT,sprintf("User created successfully\nID: %s\nDisplay Name: %s\nUsername: %s\nEmail: %s\nGlobal Role: %s", $user->id, $user->display_name, $user->username, $user->email, $user->globalRole->name));
         } catch (\Exception $e) {
             \Artisan::call("db:wipe", ["--force"=> true]);
             if (file_exists(base_path(".env"))) {
