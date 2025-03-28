@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'globalrole' => \App\Http\Middleware\CheckGlobalRole::class,
+            'isProjectMember' => \App\Http\Middleware\UserIsMember::class,
+            'csrf' => Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+            'protectOwnership' => \App\Http\Middleware\ProtectOwnership::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
