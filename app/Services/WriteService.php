@@ -93,7 +93,7 @@ class WriteService
         return JsonResponse::ok($message, $details);
     }
 
-    public function delete($model, $target_id, $message, $details)
+    public function delete($model, $target_id, $message, $details=null)
     {
         /** @var Model $instance */
         $instance = new $model;
