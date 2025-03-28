@@ -16,6 +16,8 @@ class UsersProjects extends Model
 
     protected $hidden = [
         'id',
+        'user_id',
+        'project_id',
     ];
 
     public function user(): BelongsTo {
