@@ -25,8 +25,7 @@ class ExampleDataSeeder extends Seeder
         // Generate development data on development mode
         if (config('app.example_insert')) { {
                 $user_1 = User::create([
-                    'first_name' => 'John',
-                    'last_name' => 'Doe',
+                    'display_name' => 'John Doe',
                     'username' => 'johndoe',
                     'email' => 'johndoe@example.com',
                     'password' => 'password',
@@ -34,8 +33,7 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $user_2 = User::create([
-                    'first_name' => 'Sara',
-                    'last_name' => 'Doe',
+                    'display_name' => 'Sara Doe',
                     'username' => 'saradoe',
                     'email' => 'saradoe@example.com',
                     'password' => 'password',
@@ -50,13 +48,11 @@ class ExampleDataSeeder extends Seeder
                 UsersProjects::create([
                     'user_id' => $user_1->id,
                     'project_id' => $project->id,
-                    'role_in_project' => "developer",
                 ]);
 
                 UsersProjects::create([
                     'user_id' => $user_2->id,
                     'project_id' => $project->id,
-                    'role_in_project' => "admin",
                 ]);
 
                 $module = ProjectModule::create([
