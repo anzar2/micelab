@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Support\Trashable;
 use App\Observers\TestCaseObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use \Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[ObservedBy([TestCaseObserver::class])]
 class TestCase extends Model
 {
-    use HasUlids;
+    use HasUlids, Trashable;
     protected $table = "test_case";
 
     protected $fillable = [

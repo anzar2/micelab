@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Support\Trashable;
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -15,7 +17,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 #[ObservedBy([UserObserver::class])]
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUuids;
+    use HasFactory, Notifiable, HasUuids, Trashable;
 
     
     protected $table = "users";
@@ -23,8 +25,7 @@ class User extends Authenticatable
 
     // Avaiable fields for massive assignments
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'display_name',
         'username',
         'email',
         'password',
@@ -32,7 +33,6 @@ class User extends Authenticatable
     ];
     // Hidden fields on JSON responses
     protected $hidden = [
-        'global_role',
         'password',
         'remember_token',
         'email_verified_at',
@@ -55,26 +55,18 @@ class User extends Authenticatable
     }
 
     // Mutators
-    protected function firstName(): Attribute {
+    protected function displayName(): Attribute {
         return Attribute::make(
-            get: fn (string $value) => ucfirst(strtolower($value)),
+            get: fn (string $value) => ucwords(strtolower($value)),
             set: fn (string $value) => strtolower($value),
         );
     }
 
-    protected function lastName(): Attribute {
-        return Attribute::make(
-            get: fn (string $value) => ucfirst(strtolower($value)),
-            set: fn (string $value) => strtolower($value),
-        );
+    public function preferences (): HasOne {
+        return $this->hasOne(UserPreference::class)->with('timezone');
     }
 
-    // Relations
     public function globalRole(): BelongsTo {
-        return $this->belongsTo(UserRole::class, 'global_role', 'name');
-    }
-
-    public function preferences (): BelongsTo {
-        return $this->belongsTo(UserPreference::class, 'user_preferences');
+        return $this->belongsTo(UserRole::class, 'global_role');
     }
 }

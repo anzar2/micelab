@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Support\Trashable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectModule extends Model
 {
-    use HasUuids;
+    use HasUuids, Trashable;
     protected $table = "project_modules";
 
     protected $fillable = [

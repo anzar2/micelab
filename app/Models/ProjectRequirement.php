@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Support\Trashable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class ProjectRequirement extends Model
 {
-    use HasUlids;
+    use HasUlids, Trashable;
  
     protected $table = "project_requirements";
     protected $fillable = [
@@ -40,7 +41,7 @@ class ProjectRequirement extends Model
     }
     
     public function assignees(): HasMany {
-        return $this->hasMany(RequirementAssignees::class, 'requirement_id');
+        return $this->hasMany(RequirementAssignees::class, 'requirement_id')->with('user');
     }
 
     public function expectedFlow(): Attribute {
