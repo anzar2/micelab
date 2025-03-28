@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserPreference extends Model
 {
@@ -19,4 +20,8 @@ class UserPreference extends Model
         'user_id',
         'id',
     ];
+
+    public function timezone(): BelongsTo {
+        return $this->belongsTo(Timezone::class, 'timezone', 'code');
+    }
 }
