@@ -16,13 +16,13 @@ class UsersController extends Controller
         $this->writeService = $writeService;
     }
 
-    public function all()
+    public function index()
     {
         $users = User::paginate();
         return response()->json($users);
     }
 
-    public function get($user_id)
+    public function show($user_id)
     {
         $user = User::find($user_id);
         return response()->json($user);
@@ -133,7 +133,7 @@ class UsersController extends Controller
         );
     }
 
-    public function delete($user_id)
+    public function destroy($user_id)
     {
         // This route must be protected with ProtectOwnership
 

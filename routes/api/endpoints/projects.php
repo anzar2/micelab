@@ -5,8 +5,10 @@ use App\Http\Controllers\UsersProjectsController;
 // This routes are protected with auth middleware
 
 Route::prefix("projects")->group(function () {
-    Route::get("", [ProjectsController::class, "index"]);
-    Route::get("{project_id}", [ProjectsController::class, "show"])->middleware("isProjectMember");
+    Route::middleware("globalrole:owner,admin,developer")->group(function () {
+        Route::get("", [ProjectsController::class, "index"]);
+        Route::get("{project_id}", [ProjectsController::class, "show"])->middleware("isProjectMember");
+    });
 
     Route::middleware(["csrf", "globalrole:owner,admin"])->group(function () {
         Route::post("", [ProjectsController::class, "store"]);
@@ -18,9 +20,11 @@ Route::prefix("projects")->group(function () {
 });
 
 Route::prefix("projects/{project_id}/users")->middleware(["isProjectMember"])->group(function () {
-    Route::get("", [UsersProjectsController::class, "index"]);
-    Route::get("{user_id}", [UsersProjectsController::class, "show"]);
-    Route::delete("leave", [UsersProjectsController::class, "leave"])->middleware("csrf");
+    Route::middleware("globalrole:owner,admin,developer")->group(function () {
+        Route::get("", [UsersProjectsController::class, "index"]);
+        Route::get("{user_id}", [UsersProjectsController::class, "show"]);
+        Route::delete("leave", [UsersProjectsController::class, "leave"])->middleware("csrf");
+    });
 
     Route::middleware(["csrf", "globalrole:owner,admin"])->group(function () {
         Route::post("{user_id}", [UsersProjectsController::class, "store"]);

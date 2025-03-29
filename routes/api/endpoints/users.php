@@ -11,9 +11,9 @@ Route::prefix("users/@me")->group(function () {
 
 Route::prefix("users")->group(function () {
     Route::middleware("globalrole:owner,admin")->group(function () {
-        Route::get("", [UsersController::class, "all"]);
+        Route::get("", [UsersController::class, "index"]);
         Route::get("search", [UsersController::class, "search"]);
-        Route::get("{user_id}", [UsersController::class, "get"]);
+        Route::get("{user_id}", [UsersController::class, "show"]);
     });
 
     Route::middleware(["csrf", "globalrole:owner,admin"])->group(function () {
@@ -25,6 +25,6 @@ Route::prefix("users")->group(function () {
     Route::middleware(["csrf", "globalrole:owner"])->group(function () {
         Route::put("{user_id}", [UsersController::class, "update"]);
         Route::patch("{user_id}/role", [UpdateRoleController::class, "update_role"])->middleware("protectOwnership");
-        Route::delete("{user_id}", [UsersController::class, "delete"])->middleware("protectOwnership");
+        Route::delete("{user_id}", [UsersController::class, "destroy"])->middleware("protectOwnership");
     });
 });
