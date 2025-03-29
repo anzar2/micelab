@@ -16,5 +16,4 @@ Route::prefix("projects/{project_id}/modules")
         Route::patch("{module_id}/recover", [ModulesController::class, "recover"]);
 
         Route::delete("{module_id}", [ModulesController::class, "destroy"]);
-
     });
