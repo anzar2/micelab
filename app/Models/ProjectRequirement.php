@@ -24,7 +24,7 @@ class ProjectRequirement extends Model
         'project_id'
     ];
 
-    protected $hidden = ["deleted"];
+    protected $hidden = ["deleted", "module_id", "project_id"];
 
     protected $casts = [
         'created_at' => 'datetime',
