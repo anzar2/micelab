@@ -109,15 +109,7 @@ class UsersController extends Controller
             $user_id,
             $validator,
             $data,
-            "User updated successfully",
-            [
-                "user_id" => $user_id,
-                "old" => [
-                    "display_name" => $old->display_name,
-                    "display_email" => $old->email
-                ],
-                "new" => $data
-            ]
+            "User updated successfully"
         );
     }
 
