@@ -20,7 +20,8 @@ Route::prefix("projects")->group(function () {
 Route::prefix("projects/{project_id}/users")->middleware(["isProjectMember"])->group(function () {
     Route::get("", [UsersProjectsController::class, "all"]);
     Route::get("{user_id}", [UsersProjectsController::class, "get"]);
-    Route::delete("leave", [UsersProjectsController::class, "leave"]);
+    Route::delete("leave", [UsersProjectsController::class, "leave"])
+    ->middleware("csrf");
 
     Route::middleware(["csrf", "globalrole:owner,admin"])->group(function () {
         Route::post("{user_id}", [UsersProjectsController::class, "store"]);
