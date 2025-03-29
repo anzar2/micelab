@@ -16,7 +16,7 @@ class UsersProjectsController extends Controller
         $this->writeSrv = $writeService;
     }
 
-    public function all(Request $request)
+    public function index(Request $request)
     {
         // We exclude users with global role "owner"
 
@@ -56,7 +56,7 @@ class UsersProjectsController extends Controller
         );
     }
 
-    public function get(Request $request, string $project_id, string $user_id)
+    public function show(Request $request, string $project_id, string $user_id)
     {
         // We exclude users with global role "owner"
 
@@ -72,7 +72,7 @@ class UsersProjectsController extends Controller
     }
 
     // Delete a user from a project
-    public function delete(Request $request, $project_id, $user_id)
+    public function destroy(Request $request, $project_id, $user_id)
     {
         $data = [
             "user_id" => $user_id,

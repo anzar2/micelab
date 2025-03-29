@@ -17,7 +17,7 @@ class ModulesController extends Controller
         $this->writeService = $writeService;
     }
 
-    public function all($project_id)
+    public function index($project_id)
     {
         $modules = ProjectModule::where("project_id", $project_id)
             ->where("deleted", false)
@@ -25,7 +25,7 @@ class ModulesController extends Controller
         return response()->json($modules);
     }
 
-    public function get($project_id, $module_id)
+    public function show($project_id, $module_id)
     {
         $modules = ProjectModule::where("project_id", $project_id)
             ->where("id", $module_id)
@@ -99,7 +99,7 @@ class ModulesController extends Controller
         );
     }
 
-    public function delete($project_id, $module_id)
+    public function destroy($project_id, $module_id)
     {
         return $this->writeService->delete(
             ProjectModule::class,

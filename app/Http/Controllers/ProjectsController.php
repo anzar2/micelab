@@ -18,7 +18,7 @@ class ProjectsController extends Controller
         $this->writeService = $writeService;
     }
 
-    public function all(Request $request)
+    public function index(Request $request)
     {
         // If the user has the global role "owner" or "admin", show all projects.
         // Otherwise, show only the projects that the user has been assigned to
@@ -44,7 +44,7 @@ class ProjectsController extends Controller
         return response()->json($projects);
     }
 
-    public function get($project_id)
+    public function show($project_id)
     {
         // This is protected by the middleware. Only assigned users can see the project.
         // Owners and admin bypass the validation.
@@ -119,7 +119,7 @@ class ProjectsController extends Controller
         );
     }
 
-    public function delete($project_id)
+    public function destroy($project_id)
     {
         return $this->writeService->delete(
             Project::class,
