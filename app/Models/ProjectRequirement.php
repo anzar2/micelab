@@ -18,9 +18,8 @@ class ProjectRequirement extends Model
     protected $fillable = [
         'name',
         'description',
-        'expected_behaviour',
+        'expected_flow',
         'module_id',
-        'status',
         'project_id'
     ];
 
