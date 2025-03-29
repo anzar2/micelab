@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\WriteService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -97,7 +98,10 @@ class UsersController extends Controller
 
         $validator = \Validator::make($data, [
             "display_name" => "required",
-            "email" => "email|unique:users,email," . $user_id,
+            "email" => [
+                "required",
+                Rule::unique("users")->ignore($user_id)
+            ]
         ]);
 
         return $this->writeService->update(

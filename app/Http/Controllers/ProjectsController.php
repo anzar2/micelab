@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\UsersProjects;
 use App\Services\WriteService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProjectsController extends Controller
 {
@@ -85,12 +86,11 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $project_id)
     {
-        $validator = \Validator::make($request->only(["project_name", "description"]), [
-            "project_name" => "unique:projects,project_name," . $project_id,
-            "description" => "max:255"
-        ]);
-
         $data = $request->only("project_name", "description");
+        $validator = \Validator::make($data, [
+            "project_name" => ["required", Rule::unique("projects")->ignore($project_id)],
+            "description" => "max:255|required"
+        ]);
 
         return $this->writeService->update(
             Project::class,
