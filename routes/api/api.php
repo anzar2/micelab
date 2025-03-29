@@ -19,4 +19,5 @@ Route::fallback(function () {
 Route::middleware(["auth"])->group(function () {
     include_once __DIR__ ."/endpoints/projects.php";
     include_once __DIR__ ."/endpoints/users.php";
+    include_once __DIR__ ."/endpoints/modules.php";
 });
