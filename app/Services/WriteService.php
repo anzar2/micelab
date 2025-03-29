@@ -37,7 +37,6 @@ class WriteService
 
     public function update($model, $target_id, $validator, $data, $message, $details = null)
     {
-        $update_data = [];
         if ($validator->fails()) {
             return JsonResponse::badRequest("Form has been rejected", $validator->errors()->all());
         }
@@ -49,13 +48,7 @@ class WriteService
             return JsonResponse::notFound("Record not found");
         }
 
-        foreach ($data as $key => $value) {
-            if ($value != null) {
-                $update_data[$key] = $value;
-            }
-        }
-
-        $target->update($update_data);
+        $target->update($data);
         return JsonResponse::ok($message, $details);
     }
 
