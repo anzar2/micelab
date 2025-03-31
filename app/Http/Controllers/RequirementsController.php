@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\ProjectRequirement;
+use App\Models\RequirementAssignees;
 use App\Services\WriteService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -50,6 +51,21 @@ class RequirementsController extends Controller
         );
     }
 
+    public function assign(Request $request, $project_id, $requirement_id)
+    {
+        $data = $request->only(["user_id"]);
+        $validator = \Validator::make($data, [
+            "user_id" => "uuid|exists:users,id|required|unique:requirements_assignees,user_id",
+        ]);
+
+        return $this->writesrv->create(
+            RequirementAssignees::class,
+            $validator,
+            array_merge($data, ["requirement_id" => $requirement_id]),
+            "User"
+        );
+    }
+
     public function show($project_id, $requirement_id)
     {
         $requirement = ProjectRequirement::with(["module", "assignees"])
@@ -82,26 +98,29 @@ class RequirementsController extends Controller
             ProjectRequirement::class,
             $requirement_id,
             $validator,
-            array_merge($data, ["project_id"=> $project_id]),
+            array_merge($data, ["project_id" => $project_id]),
             "Requirement updated succesfully"
         );
     }
 
-    public function trash($project_id, $requeriment_id) {
+    public function trash($project_id, $requeriment_id)
+    {
         return $this->writesrv->trash(
             ProjectRequirement::class,
             $requeriment_id,
             "Requirement trashed successfully"
         );
     }
-    public function recover($project_id, $requeriment_id) {
+    public function recover($project_id, $requeriment_id)
+    {
         return $this->writesrv->recover(
             ProjectRequirement::class,
             $requeriment_id,
             "Requirement recovered successfully"
         );
     }
-    public function delete($project_id, $requirement_id) {
+    public function delete($project_id, $requirement_id)
+    {
         return $this->writesrv->delete(
             ProjectRequirement::class,
             $requirement_id,

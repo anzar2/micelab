@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\RequirementsController;
+
 // This routes are protected with auth middleware
 
 Route::prefix("projects/{project_id}/requirements")->middleware(["isProjectMember", "globalrole:admin,developer,owner"])
@@ -10,6 +10,7 @@ Route::prefix("projects/{project_id}/requirements")->middleware(["isProjectMembe
 
         Route::middleware("csrf")->group(function () {
             Route::post("", [RequirementsController::class, "store"]);
+            Route::post("{requirement_id}/assign", [RequirementsController::class, "assign"]);
             Route::put("{requirement_id}", [RequirementsController::class, "update"]);
 
             Route::patch("{requirement_id}/trash", [RequirementsController::class, "trash"]);
