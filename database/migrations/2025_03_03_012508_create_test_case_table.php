@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("status");
         });
 
-        Schema::create('test_case', function (Blueprint $table) {
+        Schema::create('test_cases', function (Blueprint $table) {
             $table->Ulid('id')->primary();
             $table->string('descriptive_id')->nullable();
             $table->string('title');
@@ -51,7 +51,7 @@ return new class extends Migration
      */
     public function down(): void
     {   
-        Schema::dropIfExists('test_case');
+        Schema::dropIfExists('test_cases');
         Schema::dropIfExists('test_status');
         Schema::dropIfExists('test_type');
         

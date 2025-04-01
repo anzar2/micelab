@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('test_case_comments', function (Blueprint $table) {
+        Schema::create('test_cases_comments', function (Blueprint $table) {
             $table->id();
             $table->text('comment');
             $table->timestamps();
             $table->foreignUuid('user_id')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignUlid('test_case_id')->references('id')->on('test_case')->onDelete('cascade');
-            $table->foreignId('parent_id')->nullable()->constrained('test_case_comments')->onDelete('cascade');
+            $table->foreignUlid('test_case_id')->references('id')->on('test_cases')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('test_cases_comments')->onDelete('cascade');
         });
     }
 
