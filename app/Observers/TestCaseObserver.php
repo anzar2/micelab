@@ -13,7 +13,7 @@ class TestCaseObserver
      */
     public function created(TestCase $testCase)
     {
-        $project_name = $testCase->projectTask->project->project_name;
+        $project_name = $testCase->requirement->project->project_name;
         $descriptive_id = 
         "TC".
         substr(strtoupper($project_name),0,1).

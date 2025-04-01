@@ -21,4 +21,5 @@ Route::middleware(["auth"])->group(function () {
     include_once __DIR__ ."/endpoints/users.php";
     include_once __DIR__ ."/endpoints/modules.php";
     include_once __DIR__ ."/endpoints/requirements.php";
+    include_once __DIR__ ."/endpoints/test_cases.php";
 });

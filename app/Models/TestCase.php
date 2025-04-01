@@ -39,6 +39,8 @@ class TestCase extends Model
         'is_published' => 'boolean',
         'published_at' => 'datetime',
         'deleted'=> 'boolean',
+        'steps' => 'array',
+        'pre_conditions' => 'array',
         'deleted_at'=> 'datetime',
         'created_at'=> 'datetime',
         'updated_at'=> 'datetime',
@@ -46,21 +48,7 @@ class TestCase extends Model
 
     protected $hidden = ["deleted", "created_by"];
 
-    protected function steps(): Attribute {
-        return Attribute::make(
-            get: fn($value) => json_decode($value),
-            set: fn($value) => json_encode($value),
-        );
-    }
-
-    protected function preConditions(): Attribute {
-        return Attribute::make(
-            get: fn($value) => json_decode($value),
-            set: fn($value) => json_encode($value),
-        );
-    }
-
-    public function projectTask(): BelongsTo {
+    public function requirement(): BelongsTo {
         return $this->belongsTo(ProjectRequirement::class, "requirement_id");
     }
 

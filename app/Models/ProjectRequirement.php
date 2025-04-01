@@ -26,6 +26,7 @@ class ProjectRequirement extends Model
     protected $hidden = ["deleted", "module_id", "project_id"];
 
     protected $casts = [
+        'expected_flow' => 'array',
         'created_at' => 'datetime',
         'updated_at'=> 'datetime',
         'deleted_at'=> 'datetime',
@@ -41,13 +42,6 @@ class ProjectRequirement extends Model
     
     public function assignees(): HasMany {
         return $this->hasMany(RequirementAssignees::class, 'requirement_id')->with('user');
-    }
-
-    public function expectedFlow(): Attribute {
-        return Attribute::make(
-            set: fn (array $value) => json_encode($value),
-            get: fn (string $value) => json_decode($value),
-        );
     }
 
     public function activityLogs(): MorphMany

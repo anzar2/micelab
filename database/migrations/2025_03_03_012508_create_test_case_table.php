@@ -33,7 +33,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
-            $table->integer('duration_in_seconds')->nullable();
+            $table->float('duration_in_seconds')->nullable();
             $table->string('test_version')->nullable();
             $table->text('pre_conditions')->nullable();
             $table->boolean('is_automated')->nullable();
