@@ -44,11 +44,16 @@ class TestCaseController extends Controller
         ]);
 
         $validator = \Validator::make($data, [
-            "title" => "required",
+            "title" => "required|unique:test_cases,title",
             "description" => "required",
             "obtained_result" => "required",
             "test_comments"=> "required",
-            "duration_in_seconds" => "required"
+            "duration_in_seconds" => "required",
+            "test_version"=> "required",
+            "pre_conditions" => "required",
+            "is_automated"=> "required",
+            "test_type" => "required",
+            "test_status"=> "required"
         ]);
     }
 

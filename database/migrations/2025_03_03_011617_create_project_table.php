@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('project_name')->unique();
+            $table->string('name')->unique();
             $table->string('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
@@ -21,7 +21,7 @@ return new class extends Migration {
 
         Schema::create('project_modules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('module_name');
+            $table->string('name');
             $table->string('color')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
