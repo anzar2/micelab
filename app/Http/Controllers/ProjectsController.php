@@ -50,13 +50,6 @@ class ProjectsController extends Controller
         return response()->json($project);
     }
 
-    /**
-     *  BODY:
-     *      {
-     *          "name": "project_name",
-     *          "description": "project description"
-     *      }
-     */
     public function store(Request $request)
     {
         $validator = \Validator::make($request->only(["project_name", "description"]), [
@@ -73,14 +66,7 @@ class ProjectsController extends Controller
             "Project created successfully"
         );
     }
-
-    /**
-     *  BODY:
-     *      {
-     *          "name": "project_name",
-     *          "description": "project description"
-     *      }
-     */
+    
     public function update(Request $request, Project $project)
     {
         $data = $request->only("project_name", "description");

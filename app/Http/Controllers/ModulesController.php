@@ -23,7 +23,7 @@ class ModulesController extends Controller
         return response()->json($modules);
     }
 
-    public function show(Project $project,  ProjectModule $module)
+    public function show(Project $project, ProjectModule $module)
     {
         $modules = ProjectModule::where("project_id", $project->id)
             ->where("id", $module->id)
@@ -34,7 +34,11 @@ class ModulesController extends Controller
 
     public function store(Request $request, Project $project)
     {
-        $data = $request->only(["module_name", "color"]);
+        $data = [
+            "module_name" => $request->input("module_name"),
+            "color" => $request->input("color"),
+            "project_id" => $project->id,
+        ];
 
         $validator = \Validator::make($data, [
             "module_name" => [
@@ -47,33 +51,39 @@ class ModulesController extends Controller
         return $this->writeService->create(
             ProjectModule::class,
             $validator,
-            array_merge($data, ["project_id" => $project->id]),
+            $data,
             "Module created successfully"
         );
     }
 
-    public function update(Request $request, Project $project,  ProjectModule $module)
+    public function update(Request $request, Project $project, ProjectModule $module)
     {
-        $data = $request->only(["module_name", "color"]);
+        $data = [
+            "module_name" => $request->input("module_name"),
+            "color" => $request->input("color"),
+            "project_id" => $project->id,
+        ];
+
         $validator = \Validator::make($data, [
             "module_name" => [
                 "required",
                 Rule::unique("project_modules")
-                ->where("project_id", $project->id)
-                ->ignore($module->id)
+                    ->where("project_id", $project->id)
+                    ->ignore($module->id)
             ],
             "color" => ['regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
         ]);
+
         return $this->writeService->update(
             ProjectModule::class,
             $module->id,
             $validator,
-            array_merge($data, ["project_id" => $project->id]),
+            $data,
             "Module updated successfully"
         );
     }
 
-    public function trash(Project $project,  ProjectModule $module)
+    public function trash(Project $project, ProjectModule $module)
     {
         return $this->writeService->trash(
             ProjectModule::class,
@@ -82,7 +92,7 @@ class ModulesController extends Controller
         );
     }
 
-    public function recover(Project $project,  ProjectModule $module)
+    public function recover(Project $project, ProjectModule $module)
     {
         return $this->writeService->recover(
             ProjectModule::class,
@@ -91,7 +101,7 @@ class ModulesController extends Controller
         );
     }
 
-    public function destroy(Project $project,  ProjectModule $module)
+    public function destroy(Project $project, ProjectModule $module)
     {
         return $this->writeService->delete(
             ProjectModule::class,

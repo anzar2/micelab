@@ -29,12 +29,13 @@ class RequirementsController extends Controller
 
     public function store(Request $request, Project $project)
     {
-        $data = $request->only([
-            "name",
-            "description",
-            "expected_flow",
-            "module_id",
-        ]);
+        $data = [
+            "name" => $request->input("name"),
+            "description" => $request->input("description"),
+            "expected_flow" => $request->input("expected_flow"),
+            "module_id" => $request->input("module_id"),
+            "project_id" => $project->id,
+        ];
 
         $validator = \Validator::make($data, [
             "name" => "required|unique:project_requirements,name",
@@ -46,14 +47,17 @@ class RequirementsController extends Controller
         return $this->writesrv->create(
             ProjectRequirement::class,
             $validator,
-            array_merge($data, ["project_id" => $project->id]),
+            $data,
             "Requirement created succesfully."
         );
     }
 
     public function assign(Request $request, Project $project, ProjectRequirement $requirement)
     {
-        $data = $request->only(["user_id"]);
+        $data = [
+            "user_id" => $request->input("user_id"),
+            "requirement_id" => $requirement->id,
+        ];
         $validator = \Validator::make($data, [
             "user_id" => "uuid|exists:users,id|required|unique:requirements_assignees,user_id",
         ]);
@@ -61,7 +65,7 @@ class RequirementsController extends Controller
         return $this->writesrv->create(
             RequirementAssignees::class,
             $validator,
-            array_merge($data, ["requirement_id" => $requirement->id]),
+            $data,
             "User"
         );
     }
@@ -77,12 +81,13 @@ class RequirementsController extends Controller
 
     public function update(Request $request, Project $project, ProjectRequirement $requirement)
     {
-        $data = $request->only([
-            "name",
-            "description",
-            "expected_flow",
-            "module_id"
-        ]);
+        $data = [
+            "name" => $request->input("name"),
+            "description"=> $request->input("description"),
+            "expected_flow"=> $request->input("expected_flow"),
+            "module_id" => $request->input("module_id"),
+            "project_id"=> $project->id,
+        ];
 
         $validator = \Validator::make($data, [
             "name" => [
@@ -96,9 +101,9 @@ class RequirementsController extends Controller
 
         return $this->writesrv->update(
             ProjectRequirement::class,
-            $requirement->d,
+            $requirement->id,
             $validator,
-            array_merge($data, ["project_id" => $project->id]),
+            $data,
             "Requirement updated succesfully"
         );
     }
