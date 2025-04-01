@@ -23,15 +23,11 @@ class UserIsMember
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        $project_id = $request->route("project_id");
+        $project = $request->route("project");
        
-        if(!Project::find($project_id))  {
-            return JsonResponse::notFound("The project has been deleted, or doesn't exist.");
-        }
-
         if (!($user->global_role == "owner")) {
             $user_in_project = UsersProjects::where("user_id", $user->id)
-                ->where("project_id", $project_id)
+                ->where("project_id", $project->id)
                 ->first();
 
             if (!$user_in_project) {

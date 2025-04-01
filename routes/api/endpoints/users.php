@@ -13,18 +13,18 @@ Route::prefix("users")->group(function () {
     Route::middleware("globalrole:owner,admin")->group(function () {
         Route::get("", [UsersController::class, "index"]);
         Route::get("search", [UsersController::class, "search"]);
-        Route::get("{user_id}", [UsersController::class, "show"]);
+        Route::get("{user}", [UsersController::class, "show"]);
     });
 
     Route::middleware(["csrf", "globalrole:owner,admin"])->group(function () {
         Route::post("", [UsersController::class, "store"]);
-        Route::patch("{user_id}/recover", [UsersController::class, "recover"]);
-        Route::patch("{user_id}/trash", [UsersController::class, "trash"])->middleware("protectOwnership");
+        Route::patch("{user}/recover", [UsersController::class, "recover"]);
+        Route::patch("{user}/trash", [UsersController::class, "trash"])->middleware("protectOwnership");
     });
 
     Route::middleware(["csrf", "globalrole:owner"])->group(function () {
-        Route::put("{user_id}", [UsersController::class, "update"]);
-        Route::patch("{user_id}/role", [UpdateRoleController::class, "update_role"])->middleware("protectOwnership");
-        Route::delete("{user_id}", [UsersController::class, "destroy"])->middleware("protectOwnership");
+        Route::put("{user}", [UsersController::class, "update"]);
+        Route::patch("{user}/role", [UpdateRoleController::class, "update_role"])->middleware("protectOwnership");
+        Route::delete("{user}", [UsersController::class, "destroy"])->middleware("protectOwnership");
     });
 });

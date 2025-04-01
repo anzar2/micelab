@@ -22,9 +22,8 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
-    public function show($user_id)
+    public function show(User $user)
     {
-        $user = User::find($user_id);
         return response()->json($user);
     }
 
@@ -87,10 +86,8 @@ class UsersController extends Controller
         );
     }
 
-    public function update(Request $request, $user_id)
+    public function update(Request $request, User $user)
     {
-        $old = User::find($user_id);
-
         $data = $request->only([
             "display_name",
             "email"
@@ -100,48 +97,48 @@ class UsersController extends Controller
             "display_name" => "required",
             "email" => [
                 "required",
-                Rule::unique("users")->ignore($user_id)
+                Rule::unique("users")->ignore($user->id)
             ]
         ]);
 
         return $this->writeService->update(
             User::class,
-            $user_id,
+            $user->id,
             $validator,
             $data,
             "User updated successfully"
         );
     }
 
-    public function trash(Request $request, $user_id)
+    public function trash(User $user)
     {
         // This route must be protected with ProtectOwnership
 
         return $this->writeService->trash(
             User::class,
-            $user_id,
+            $user->id,
             "User trashed successfully"
         );
     }
 
-    public function recover($user_id)
+    public function recover(User $user)
     {
         return $this->writeService->recover(
             User::class,
-            $user_id,
+            $user->id,
             "User recovered successfully"
         );
     }
 
-    public function destroy($user_id)
+    public function destroy(User $user)
     {
         // This route must be protected with ProtectOwnership
 
         return $this->writeService->delete(
             User::class,
-            $user_id,
+            $user->id,
             "User deleted permanently",
-            ["user_id" => $user_id]
+            ["user_id" => $user->id]
         );
     }
 }

@@ -27,7 +27,7 @@ class RequirementsController extends Controller
         return response()->json($requirements);
     }
 
-    public function store(Request $request, $project_id)
+    public function store(Request $request, Project $project)
     {
         $data = $request->only([
             "name",
@@ -46,12 +46,12 @@ class RequirementsController extends Controller
         return $this->writesrv->create(
             ProjectRequirement::class,
             $validator,
-            array_merge($data, ["project_id" => $project_id]),
+            array_merge($data, ["project_id" => $project->id]),
             "Requirement created succesfully."
         );
     }
 
-    public function assign(Request $request, $project_id, $requirement_id)
+    public function assign(Request $request, Project $project, ProjectRequirement $requirement)
     {
         $data = $request->only(["user_id"]);
         $validator = \Validator::make($data, [
@@ -61,21 +61,21 @@ class RequirementsController extends Controller
         return $this->writesrv->create(
             RequirementAssignees::class,
             $validator,
-            array_merge($data, ["requirement_id" => $requirement_id]),
+            array_merge($data, ["requirement_id" => $requirement->id]),
             "User"
         );
     }
 
-    public function show($project_id, $requirement_id)
+    public function show(Project $project, ProjectRequirement $requirement)
     {
         $requirement = ProjectRequirement::with(["module", "assignees"])
-            ->where("project_id", $project_id)
-            ->where("id", $requirement_id)->first();
+            ->where("project_id", $project->id)
+            ->where("id", $requirement->id)->first();
 
         return response()->json($requirement);
     }
 
-    public function update(Request $request, $project_id, $requirement_id)
+    public function update(Request $request, Project $project, ProjectRequirement $requirement)
     {
         $data = $request->only([
             "name",
@@ -87,7 +87,7 @@ class RequirementsController extends Controller
         $validator = \Validator::make($data, [
             "name" => [
                 "required",
-                Rule::unique("project_requirements")->ignore($requirement_id)
+                Rule::unique("project_requirements")->ignore($requirement->d)
             ],
             "description" => "nullable|string",
             "expected_flow" => "required|array",
@@ -96,34 +96,34 @@ class RequirementsController extends Controller
 
         return $this->writesrv->update(
             ProjectRequirement::class,
-            $requirement_id,
+            $requirement->d,
             $validator,
-            array_merge($data, ["project_id" => $project_id]),
+            array_merge($data, ["project_id" => $project->id]),
             "Requirement updated succesfully"
         );
     }
 
-    public function trash($project_id, $requeriment_id)
+    public function trash(Project $project, ProjectRequirement $requirement)
     {
         return $this->writesrv->trash(
             ProjectRequirement::class,
-            $requeriment_id,
+            $requirement->id,
             "Requirement trashed successfully"
         );
     }
-    public function recover($project_id, $requeriment_id)
+    public function recover(Project $project, ProjectRequirement $requirement)
     {
         return $this->writesrv->recover(
             ProjectRequirement::class,
-            $requeriment_id,
+            $requirement->id,
             "Requirement recovered successfully"
         );
     }
-    public function delete($project_id, $requirement_id)
+    public function delete(Project $project, ProjectRequirement $requirement)
     {
         return $this->writesrv->delete(
             ProjectRequirement::class,
-            $requirement_id,
+            $requirement->id,
             "Requirement deleted successfully"
         );
     }

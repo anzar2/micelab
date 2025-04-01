@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Responses\JsonResponse;
 use App\Models\Project;
 use App\Models\UsersProjects;
 use App\Services\WriteService;
@@ -25,11 +24,11 @@ class ProjectsController extends Controller
 
         $user = $request->user();
         $user_role = $user->global_role;
-
+        $page = $request->query("page", 1);
 
         if (in_array($user_role, ["owner", "admin"])) {
             $projects = Project::where('deleted', false)
-                ->get();
+                ->paginate(perPage: 20, page: $page);
         } else {
             $projects = UsersProjects::with(['project'])
                 ->where("user_id", $user->id)
@@ -44,12 +43,10 @@ class ProjectsController extends Controller
         return response()->json($projects);
     }
 
-    public function show($project_id)
+    public function show(Project $project)
     {
         // This is protected by the middleware. Only assigned users can see the project.
         // Owners and admin bypass the validation.
-
-        $project = Project::find($project_id);
         return response()->json($project);
     }
 
@@ -84,46 +81,46 @@ class ProjectsController extends Controller
      *          "description": "project description"
      *      }
      */
-    public function update(Request $request, $project_id)
+    public function update(Request $request, Project $project)
     {
         $data = $request->only("project_name", "description");
         $validator = \Validator::make($data, [
-            "project_name" => ["required", Rule::unique("projects")->ignore($project_id)],
+            "project_name" => ["required", Rule::unique("projects")->ignore($project->id)],
             "description" => "max:255|required"
         ]);
 
         return $this->writeService->update(
             Project::class,
-            $project_id,
+            $project->id,
             $validator,
             $data,
             "Project updated successfully"
         );
     }
 
-    public function trash($project_id)
+    public function trash(Project $project)
     {
         return $this->writeService->trash(
             Project::class,
-            $project_id,
+            $project->id,
             "Project trashed successfully"
         );
     }
 
-    public function recover($project_id)
+    public function recover(Project $project)
     {
         return $this->writeService->recover(
             Project::class,
-            $project_id,
+            $project->id,
             "Project recovered successfully"
         );
     }
 
-    public function destroy($project_id)
+    public function destroy(Project $project)
     {
         return $this->writeService->delete(
             Project::class,
-            $project_id,
+            $project->id,
             "Project deleted permanently"
         );
     }
