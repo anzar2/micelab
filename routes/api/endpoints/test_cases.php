@@ -16,5 +16,7 @@ Route::prefix("projects/{project}/requirements/{requirement}/test-cases")
             Route::delete("{test_case}", [TestCaseController::class, "destroy"]);
             Route::patch("{test_case}/trash", [TestCaseController::class, "trash"]);
             Route::patch("{test_case}/recover", [TestCaseController::class, "recover"]);
+            Route::patch("{test_case}/publish", [TestCaseController::class, "publish"]);
+            Route::patch("{test_case}/unpublish", [TestCaseController::class, "unpublish"]);
         });
     });
