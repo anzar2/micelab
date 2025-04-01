@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CaseComment extends Model
 {
-    protected $table = "test_case_comments";
+    protected $table = "test_cases_comments";
    
 
     protected $fillable = [

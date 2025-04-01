@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TestCase extends Model
 {
     use HasUlids, Trashable;
-    protected $table = "test_case";
+    protected $table = "test_cases";
 
     protected $fillable = [
         "descriptive_id",

@@ -56,7 +56,7 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $module = ProjectModule::create([
-                    'module' => __('seeder.module.name'),
+                    'name' => __('seeder.module.name'),
                     'project_id' => $project->id,
                     'color' => '#ff0000',
                 ]);
@@ -119,6 +119,7 @@ class ExampleDataSeeder extends Seeder
                     'description' => __('seeder.bugReport.description'),
                     'steps_to_reproduce' => __('seeder.bugReport.steps_to_reproduce'),
                     'requirement_id' => $requirement->id,
+                    'project_id' => $project->id,
                     'created_by' => $user_2->id,
                 ]);
 
