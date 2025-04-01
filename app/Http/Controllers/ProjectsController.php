@@ -52,13 +52,14 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->only(["project_name", "description"]), [
-            "project_name" => "required|unique:projects,project_name",
+        $data = $request->only("name", "description");
+        
+        $validator = \Validator::make($data, [
+            "name" => "required|unique:projects,name",
             "description" => "required"
         ]);
 
-        $data = $request->only("project_name", "description");
-
+        
         return $this->writeService->create(
             Project::class,
             $validator,
@@ -69,9 +70,10 @@ class ProjectsController extends Controller
     
     public function update(Request $request, Project $project)
     {
-        $data = $request->only("project_name", "description");
+        $data = $request->only("name", "description");
+        
         $validator = \Validator::make($data, [
-            "project_name" => ["required", Rule::unique("projects")->ignore($project->id)],
+            "name" => ["required", Rule::unique("projects")->ignore($project->id)],
             "description" => "max:255|required"
         ]);
 
