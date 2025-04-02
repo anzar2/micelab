@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\ProjectRequirement;
 use App\Models\RequirementAssignees;
-use App\Services\WriteService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -38,7 +37,7 @@ class RequirementsController extends Controller
             "module_id" => "nullable|string|exists:project_modules,id",
         ]);
 
-        return $this->writesrv->create(
+        return $this->writeService->create(
             ProjectRequirement::class,
             $validator,
             $data,
@@ -56,7 +55,7 @@ class RequirementsController extends Controller
             "user_id" => "uuid|exists:users,id|required|unique:requirements_assignees,user_id",
         ]);
 
-        return $this->writesrv->create(
+        return $this->writeService->create(
             RequirementAssignees::class,
             $validator,
             $data,
@@ -93,7 +92,7 @@ class RequirementsController extends Controller
             "module_id" => "nullable|string|exists:project_modules,id",
         ]);
 
-        return $this->writesrv->update(
+        return $this->writeService->update(
             ProjectRequirement::class,
             $requirement->id,
             $validator,
@@ -104,7 +103,7 @@ class RequirementsController extends Controller
 
     public function trash(Project $project, ProjectRequirement $requirement)
     {
-        return $this->writesrv->trash(
+        return $this->writeService->trash(
             ProjectRequirement::class,
             $requirement->id,
             "Requirement trashed successfully"
@@ -112,7 +111,7 @@ class RequirementsController extends Controller
     }
     public function recover(Project $project, ProjectRequirement $requirement)
     {
-        return $this->writesrv->recover(
+        return $this->writeService->recover(
             ProjectRequirement::class,
             $requirement->id,
             "Requirement recovered successfully"
@@ -120,7 +119,7 @@ class RequirementsController extends Controller
     }
     public function delete(Project $project, ProjectRequirement $requirement)
     {
-        return $this->writesrv->delete(
+        return $this->writeService->delete(
             ProjectRequirement::class,
             $requirement->id,
             "Requirement deleted successfully"

@@ -42,7 +42,7 @@ class UsersProjectsController extends Controller
             ],
         ]);
 
-        return $this->writeSrv->create(
+        return $this->writeService->create(
             UsersProjects::class,
             $validator,
             $data,

@@ -12,12 +12,6 @@ use Illuminate\Validation\Rule;
 
 class TestCaseController extends Controller
 {
-    protected $writeService;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeService = $writeService;
-    }
-
     public function index(Request $request, Project $project, ProjectRequirement $requirement)
     {
         $perPage = 20;
