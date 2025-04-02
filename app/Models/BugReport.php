@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\BugReportLog;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
-
+#[ObservedBy([BugReportLog::class])]
 class BugReport extends Model
 {
     use HasUlids;

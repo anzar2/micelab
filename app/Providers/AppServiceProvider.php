@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             'case_comment' => 'App\Models\CaseComment',
             'bug_report' => 'App\Models\BugReport',
             'bug_comment' => 'App\Models\BugComments',
+            'project_module' => 'App\Models\ProjectModule'
         ]);
     }
 }
