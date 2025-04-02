@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Responses\JsonResponse;
+
 use App\Models\User;
-use App\Services\WriteService;
 use Illuminate\Http\Request;
 
 class UpdateRoleController extends Controller
