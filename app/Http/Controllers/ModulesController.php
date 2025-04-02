@@ -9,12 +9,6 @@ use Illuminate\Validation\Rule;
 
 class ModulesController extends Controller
 {
-    protected $writeService;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeService = $writeService;
-    }
-
     public function index(Project $project)
     {
         $modules = ProjectModule::where("project_id", $project->id)

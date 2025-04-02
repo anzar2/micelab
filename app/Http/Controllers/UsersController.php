@@ -10,12 +10,6 @@ use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
-    protected $writeService;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeService = $writeService;
-    }
-
     public function index()
     {
         $users = User::paginate();

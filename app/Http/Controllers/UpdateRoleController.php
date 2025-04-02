@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class UpdateRoleController extends Controller
 {
-    protected $writeService;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeService = $writeService;
-    }
     public function update_role(Request $request, $user_id)
     {
         // This route should be protected with ProtectOwnership

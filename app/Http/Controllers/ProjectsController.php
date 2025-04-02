@@ -10,13 +10,6 @@ use Illuminate\Validation\Rule;
 
 class ProjectsController extends Controller
 {
-
-    protected $writeService;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeService = $writeService;
-    }
-
     public function index(Request $request)
     {
         // If the user has the global role "owner" or "admin", show all projects.

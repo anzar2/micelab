@@ -10,12 +10,6 @@ use Illuminate\Validation\Rule;
 
 class RequirementsController extends Controller
 {
-
-    protected $writesrv;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writesrv = $writeService;
-    }
     public function index(Request $request)
     {
         $perPage = 20;

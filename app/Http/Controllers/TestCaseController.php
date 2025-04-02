@@ -28,10 +28,10 @@ class TestCaseController extends Controller
         return response()->json($test_cases);
     }
 
-    public function show(Project $project, ProjectRequirement $requirement, $test_case_id)
+    public function show(Project $project, ProjectRequirement $requirement, TestCase $test_case)
     {
         $test_case = TestCase::where("requirement_id", $requirement->id)
-            ->where("id", $test_case_id)
+            ->where("id", $test_case->id)
             ->first();
         return response()->json($test_case);
     }

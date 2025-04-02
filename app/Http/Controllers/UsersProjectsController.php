@@ -12,12 +12,6 @@ use Illuminate\Validation\Rule;
 
 class UsersProjectsController extends Controller
 {
-    protected $writeSrv;
-    public function __construct(WriteService $writeService)
-    {
-        $this->writeSrv = $writeService;
-    }
-
     public function index(Request $request)
     {
         // We exclude users with global role "owner"
