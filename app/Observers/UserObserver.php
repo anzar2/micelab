@@ -12,43 +12,11 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $default = UserPreference::create([
+        UserPreference::create([
             "user_id"=> $user->id,
             "theme"=> 'auto',
-            'language'=> env('APP_LOCALE', 'en'),
+            'language'=> config('app.locale'),
             'timezone'=> 417,
         ]);
-    }
-
-    /**
-     * Handle the User "updated" event.
-     */
-    public function updated(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "deleted" event.
-     */
-    public function deleted(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "restored" event.
-     */
-    public function restored(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "force deleted" event.
-     */
-    public function forceDeleted(User $user): void
-    {
-        //
     }
 }

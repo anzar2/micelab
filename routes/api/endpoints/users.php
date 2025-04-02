@@ -7,6 +7,10 @@ use App\Http\Controllers\UsersController;
 
 Route::prefix("users/@me")->group(function () {
     Route::get("", [MeController::class, "get"]);
+    Route::middleware("csrf")->group(function () {
+        Route::patch("", [MeController::class, "update"]);
+        Route::patch("preferences", [MeController::class, "update_preferences"]);
+    });
 });
 
 Route::prefix("users")->group(function () {

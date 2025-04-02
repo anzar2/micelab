@@ -68,14 +68,7 @@ class UsersController extends Controller
             User::class,
             $validator,
             $data,
-            "User created successfully",
-            [
-                "new" => [
-                    "display_name" => $data["display_name"],
-                    "email" => $data["email"],
-                    "username" => $data["username"]
-                ]
-            ]
+            "User created successfully"
         );
     }
 
