@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('test_cases_comments', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
+            $table->text('case_comment');
             $table->timestamps();
             $table->foreignUuid('user_id')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->foreignUlid('test_case_id')->references('id')->on('test_cases')->onDelete('cascade');

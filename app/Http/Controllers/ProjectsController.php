@@ -44,10 +44,10 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->only("name", "description");
+        $data = $request->only("project_name", "description");
         
         $validator = \Validator::make($data, [
-            "name" => "required|unique:projects,name",
+            "project_name" => "required|unique:projects,name",
             "description" => "required"
         ]);
 
@@ -62,10 +62,10 @@ class ProjectsController extends Controller
     
     public function update(Request $request, Project $project)
     {
-        $data = $request->only("name", "description");
+        $data = $request->only("project_name", "description");
         
         $validator = \Validator::make($data, [
-            "name" => ["required", Rule::unique("projects")->ignore($project->id)],
+            "project_name" => ["required", Rule::unique("projects")->ignore($project->id)],
             "description" => "max:255|required"
         ]);
 

@@ -28,13 +28,13 @@ class ModulesController extends Controller
     public function store(Request $request, Project $project)
     {
         $data = [
-            "name" => $request->input("name"),
+            "module_name" => $request->input("module_name"),
             "color" => $request->input("color"),
             "project_id" => $project->id,
         ];
 
         $validator = \Validator::make($data, [
-            "name" => [
+            "module_name" => [
                 "required",
                 Rule::unique('project_modules')->where('project_id', $project->id)
             ],
@@ -52,13 +52,13 @@ class ModulesController extends Controller
     public function update(Request $request, Project $project, ProjectModule $module)
     {
         $data = [
-            "name" => $request->input("name"),
+            "module_name" => $request->input("module_name"),
             "color" => $request->input("color"),
             "project_id" => $project->id,
         ];
 
         $validator = \Validator::make($data, [
-            "name" => [
+            "module_name" => [
                 "required",
                 Rule::unique("project_modules")
                     ->where("project_id", $project->id)

@@ -23,16 +23,16 @@ class RequirementsController extends Controller
     public function store(Request $request, Project $project)
     {
         $data = [
-            "name" => $request->input("name"),
-            "description" => $request->input("description"),
+            "requirement_name" => $request->input("requirement_name"),
+            "requirement_description" => $request->input("requirement_description"),
             "expected_flow" => $request->input("expected_flow"),
             "module_id" => $request->input("module_id"),
             "project_id" => $project->id,
         ];
 
         $validator = \Validator::make($data, [
-            "name" => "required|unique:project_requirements,name",
-            "description" => "string",
+            "requirement_name" => "required|unique:project_requirements,requirement_name",
+            "requirement_description" => "string",
             "expected_flow" => "required|array",
             "module_id" => "nullable|string|exists:project_modules,id",
         ]);
@@ -75,19 +75,19 @@ class RequirementsController extends Controller
     public function update(Request $request, Project $project, ProjectRequirement $requirement)
     {
         $data = [
-            "name" => $request->input("name"),
-            "description"=> $request->input("description"),
+            "requirement_name" => $request->input("requirement_name"),
+            "requirement_description"=> $request->input("requirement_description"),
             "expected_flow"=> $request->input("expected_flow"),
             "module_id" => $request->input("module_id"),
             "project_id"=> $project->id,
         ];
 
         $validator = \Validator::make($data, [
-            "name" => [
+            "requirement_name" => [
                 "required",
                 Rule::unique("project_requirements")->ignore($requirement->d)
             ],
-            "description" => "nullable|string",
+            "requirement_description" => "nullable|string",
             "expected_flow" => "required|array",
             "module_id" => "nullable|string|exists:project_modules,id",
         ]);

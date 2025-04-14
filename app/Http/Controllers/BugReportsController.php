@@ -26,7 +26,7 @@ class BugReportsController extends Controller
     {
         $data = [
             "title"=> $request->input("title"),
-            "description"=> $request->input("description"),
+            "bug_description"=> $request->input("bug_description"),
             "steps_to_reproduce"=> $request->input("steps_to_reproduce"),
             "requirement_id" => $request->input("requirement_id"),
             "project_id" => $project->id
@@ -34,7 +34,7 @@ class BugReportsController extends Controller
 
         $validator = \Validator::make($data, [
             "title"=> "required|unique:bug_reports,title",
-            "description"=> "required|string",
+            "bug_description"=> "required|string",
             "steps_to_reproduce" => "required|array",
             "requirement_id" => "required|exists:project_requirements,id"
         ]);
@@ -52,7 +52,7 @@ class BugReportsController extends Controller
     {
         $data = [
             "title"=> $request->input("title"),
-            "description"=> $request->input("description"),
+            "bug_description"=> $request->input("bug_description"),
             "steps_to_reproduce"=> $request->input("steps_to_reproduce"),
             "requirement_id" => $request->input("requirement_id"),
             "project_id" => $project->id
@@ -60,7 +60,7 @@ class BugReportsController extends Controller
 
         $validator = \Validator::make($data, [
             "title"=> ["required", Rule::unique("bug_reports")->ignore($bugReport->id)],
-            "description"=> "required|string",
+            "bug_description"=> "required|string",
             "steps_to_reproduce" => "required|array",
             "requirement_id" => "required|exists:project_requirements,id"
         ]);

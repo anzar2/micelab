@@ -25,14 +25,14 @@ class CaseCommentsController extends Controller
         TestCase $test_case
     ) {
         $data = [
-            "comment" => $request->input("comment"),
+            "case_comment" => $request->input("case_comment"),
             "user_id" => $request->user()->id,
             "test_case_id" => $test_case->id,
             "parent_id" => $request->input("parent_id")
         ];
 
         $validator = \Validator::make($data, [
-            "comment" => "required|string",
+            "case_comment" => "required|string",
             "parent_id" => "nullable|numeric|exists:test_cases_comments,id"
         ]);
 
@@ -51,10 +51,10 @@ class CaseCommentsController extends Controller
         TestCase $test_case,
         CaseComment $comment
     ) {
-        $data = $request->input("comment");
+        $data = $request->input("case_comment");
 
         $validator = \Validator::make($data, [
-            "comment" => "required|string",
+            "case_comment" => "required|string",
         ]);
 
         return $this->writeService->update(

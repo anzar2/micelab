@@ -33,8 +33,8 @@ class TestCaseController extends Controller
     public function store(Request $request, Project $project, ProjectRequirement $requirement)
     {
         $data = [
-            "title" => $request->input("title"),
-            "description" => $request->input("description"),
+            "case_title" => $request->input("case_title"),
+            "case_description" => $request->input("case_description"),
             "steps" => $request->input("steps"),
             "obtained_result" => $request->input("obtained_result"),
             "test_comments" => $request->input("test_comments"),
@@ -48,8 +48,8 @@ class TestCaseController extends Controller
         ];
 
         $validator = \Validator::make($data, [
-            "title" => "required|string|unique:test_cases,title",
-            "description" => "required",
+            "case_title" => "required|string|unique:test_cases,case_title",
+            "case_description" => "required",
             "steps" => "required|array",
             "obtained_result" => "nullable|string",
             "test_comments" => "nullable|string",
@@ -73,8 +73,8 @@ class TestCaseController extends Controller
     public function update(Request $request, Project $project, ProjectRequirement $requirement, TestCase $test_case)
     {
         $data = [
-            "title" => $request->input("title"),
-            "description" => $request->input("description"),
+            "case_title" => $request->input("case_title"),
+            "case_description" => $request->input("case_description"),
             "steps" => $request->input("steps"),
             "obtained_result" => $request->input("obtained_result"),
             "test_comments" => $request->input("test_comments"),
@@ -88,8 +88,8 @@ class TestCaseController extends Controller
         ];
 
         $validator = \Validator::make($data, [
-            "title" => ["required", "string", Rule::unique("test_case")->ignore($test_case->id)],
-            "description" => "required",
+            "case_title" => ["required", "string", Rule::unique("test_case")->ignore($test_case->id)],
+            "case_description" => "required",
             "steps" => "required|array",
             "obtained_result" => "nullable|string",
             "test_comments" => "nullable|string",

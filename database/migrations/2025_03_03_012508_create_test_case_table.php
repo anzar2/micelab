@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create("test_type", function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("test_type");
             $table->boolean('is_custom')->default(true);
         });
 
         Schema::create("test_status", function (Blueprint $table) {
             $table->id();
-            $table->string("status");
+            $table->string("test_status");
         });
 
         Schema::create('test_cases', function (Blueprint $table) {
             $table->Ulid('id')->primary();
             $table->string('descriptive_id')->nullable();
-            $table->string('title');
-            $table->text('description');
+            $table->string('case_title');
+            $table->text('case_description');
             $table->text('steps');
             $table->text('obtained_result');
             $table->text('test_comments')->nullable();

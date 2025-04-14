@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name')->unique();
+            $table->string('project_name')->unique();
             $table->string('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
@@ -21,7 +21,7 @@ return new class extends Migration {
 
         Schema::create('project_modules', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->string('module_name');
             $table->string('color')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
@@ -31,8 +31,8 @@ return new class extends Migration {
 
         Schema::create('project_requirements', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('requirement_name');
+            $table->text('requirement_description')->nullable();
             $table->text('expected_flow');
             $table->foreignUuid('module_id')->nullable()->constrained('project_modules')->onDelete('set null');
             $table->boolean('deleted')->default(false);

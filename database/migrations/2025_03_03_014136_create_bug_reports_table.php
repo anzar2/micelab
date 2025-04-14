@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('bug_reports', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('title');
-            $table->text('description');
+            $table->string('bug_title');
+            $table->text('bug_description');
             $table->text('steps_to_reproduce');
             $table->timestamps();
             $table->foreignUlid('project_id')->constrained('projects')->onDelete('cascade');

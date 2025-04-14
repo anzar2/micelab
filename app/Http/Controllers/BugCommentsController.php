@@ -23,14 +23,14 @@ class BugCommentsController extends Controller
         BugReport $bug_report
     ) {
         $data = [
-            "comment" => $request->input("comment"),
+            "bug_comment" => $request->input("bug_comment"),
             "user_id" => $request->user()->id,
             "bug_report_id" => $bug_report->id,
             "parent_id" => $request->input("parent_id")
         ];
 
         $validator = \Validator::make($data, [
-            "comment" => "required|string",
+            "bug_comment" => "required|string",
             "parent_id" => "nullable|numeric|exists:test_cases_comments,id"
         ]);
 
@@ -48,10 +48,10 @@ class BugCommentsController extends Controller
         BugReport $bug_report,
         BugComments $comment
     ) {
-        $data = $request->only("comment");
+        $data = $request->only("bug_comment");
 
         $validator = \Validator::make($data, [
-            "comment" => "required|string",
+            "bug_comment" => "required|string",
         ]);
 
         return $this->writeService->update(

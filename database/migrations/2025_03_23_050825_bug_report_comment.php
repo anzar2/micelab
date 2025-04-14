@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bug_report_comments', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');
+            $table->text('bug_comment');
             $table->timestamps();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignUlid('bug_report_id')->constrained('bug_reports')->onDelete('cascade');
