@@ -14,8 +14,8 @@ class BugReport extends Model
     use HasUlids;
     protected $table = "bug_reports";
     protected $fillable = [
-        "title",
-        "description",
+        "bug_title",
+        "bug_description",
         "steps_to_reproduce",
         "task_id",
         "created_by",

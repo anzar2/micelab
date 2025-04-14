@@ -10,7 +10,7 @@ class BugComments extends Model
 {   
     protected $table = "bug_report_comments";
     protected $fillable = [
-        "comment",
+        "bug_comment",
         "user_id",
         "bug_report_id",
         "parent_id",

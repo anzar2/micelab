@@ -12,7 +12,7 @@ class Project extends Model
     protected $table = "projects";
     protected $fillable = [
         "project_name",
-        "description",
+        "project_description",
     ];
 
     protected $hidden = ["deleted"];

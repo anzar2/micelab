@@ -16,7 +16,7 @@ class CaseComment extends Model
    
 
     protected $fillable = [
-        "comment",
+        "case_comment",
         "user_id",
         "test_case_id",
         "parent_id",

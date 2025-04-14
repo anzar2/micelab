@@ -9,7 +9,7 @@ class TestType extends Model
     protected $table = "test_type";
     public $timestamps = false;
     protected $fillable = [
-        "name",
+        "test_type",
     ];
 
     protected $casts = [

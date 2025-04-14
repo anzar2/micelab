@@ -19,8 +19,8 @@ class TestCase extends Model
 
     protected $fillable = [
         "descriptive_id",
-        "title",
-        "description",
+        "case_title",
+        "case_description",
         "steps",
         "obtained_result",
         "test_comments",

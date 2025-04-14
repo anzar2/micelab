@@ -25,16 +25,16 @@ class BugReportsController extends Controller
     public function store(Request $request, Project $project)
     {
         $data = [
-            "title"=> $request->input("title"),
-            "bug_description"=> $request->input("bug_description"),
-            "steps_to_reproduce"=> $request->input("steps_to_reproduce"),
+            "bug_title" => $request->input("bug_title"),
+            "bug_description" => $request->input("bug_description"),
+            "steps_to_reproduce" => $request->input("steps_to_reproduce"),
             "requirement_id" => $request->input("requirement_id"),
             "project_id" => $project->id
         ];
 
         $validator = \Validator::make($data, [
-            "title"=> "required|unique:bug_reports,title",
-            "bug_description"=> "required|string",
+            "bug_title" => "required|unique:bug_reports,bug_title",
+            "bug_description" => "required|string",
             "steps_to_reproduce" => "required|array",
             "requirement_id" => "required|exists:project_requirements,id"
         ]);
@@ -51,16 +51,16 @@ class BugReportsController extends Controller
     public function update(Request $request, Project $project, BugReport $bugReport)
     {
         $data = [
-            "title"=> $request->input("title"),
-            "bug_description"=> $request->input("bug_description"),
-            "steps_to_reproduce"=> $request->input("steps_to_reproduce"),
+            "bug_title" => $request->input("bug_title"),
+            "bug_description" => $request->input("bug_description"),
+            "steps_to_reproduce" => $request->input("steps_to_reproduce"),
             "requirement_id" => $request->input("requirement_id"),
             "project_id" => $project->id
         ];
 
         $validator = \Validator::make($data, [
-            "title"=> ["required", Rule::unique("bug_reports")->ignore($bugReport->id)],
-            "bug_description"=> "required|string",
+            "bug_title" => ["required", Rule::unique("bug_reports")->ignore($bugReport->id)],
+            "bug_description" => "required|string",
             "steps_to_reproduce" => "required|array",
             "requirement_id" => "required|exists:project_requirements,id"
         ]);

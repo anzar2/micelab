@@ -18,8 +18,8 @@ class ProjectRequirement extends Model
  
     protected $table = "project_requirements";
     protected $fillable = [
-        'name',
-        'description',
+        'project_name',
+        'project_description',
         'expected_flow',
         'module_id',
         'project_id'

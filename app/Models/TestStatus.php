@@ -9,7 +9,7 @@ class TestStatus extends Model
     protected $table = "test_status";
     public $timestamps = false;
     protected $fillable = [
-        "status",
+        "test_status",
     ];
 
     protected $hidden = ["id"];

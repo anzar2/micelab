@@ -9,6 +9,6 @@ class Team extends Model
     public $timestamps = false;
     protected $table = "teams";
     protected $fillable = [
-        'name',
+        'team_name',
     ];
 }
