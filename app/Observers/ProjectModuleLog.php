@@ -13,13 +13,15 @@ class ProjectModuleLog
      */
     public function created(ProjectModule $project_module): void
     {
-        ActivityLog::create([
-            "action" => "create",
-            "subject_type" => "bug_report",
-            "subject_id" => $project_module->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "create",
+                "subject_type" => "bug_report",
+                "subject_id" => $project_module->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -27,13 +29,15 @@ class ProjectModuleLog
      */
     public function updated(ProjectModule $project_module): void
     {
-        ActivityLog::create([
-            "action" => "update",
-            "subject_type" => "bug_report",
-            "subject_id" => $project_module->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "update",
+                "subject_type" => "bug_report",
+                "subject_id" => $project_module->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -41,12 +45,14 @@ class ProjectModuleLog
      */
     public function deleted(ProjectModule $project_module): void
     {
-        ActivityLog::create([
-            "action" => "delete",
-            "subject_type" => "bug_report",
-            "subject_id" => $project_module->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "delete",
+                "subject_type" => "bug_report",
+                "subject_id" => $project_module->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 }

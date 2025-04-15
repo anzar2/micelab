@@ -13,10 +13,10 @@ class TestStatusSeeder extends Seeder
     public function run(): void
     {
         TestStatus::insert([
-            ['status' => 'pending'],
-            ['status' => 'passed'],
-            ['status' => 'failed'],
-            ['status' => 'skipped'],
+            ['test_status' => 'pending'],
+            ['test_status' => 'passed'],
+            ['test_status' => 'failed'],
+            ['test_status' => 'skipped'],
         ]);
     }
 }

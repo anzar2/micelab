@@ -13,13 +13,15 @@ class BugCommentsLog
      */
     public function created(BugComments $bug_comments): void
     {
-        ActivityLog::create([
-            "action" => "create",
-            "subject_type" => "bug_comment",
-            "subject_id" => $bug_comments->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "create",
+                "subject_type" => "bug_comment",
+                "subject_id" => $bug_comments->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**

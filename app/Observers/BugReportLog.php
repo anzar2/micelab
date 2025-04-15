@@ -13,13 +13,15 @@ class BugReportLog
      */
     public function created(BugReport $bug_report): void
     {
-        ActivityLog::create([
-            "action" => "create",
-            "subject_type" => "bug_report",
-            "subject_id" => $bug_report->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "create",
+                "subject_type" => "bug_report",
+                "subject_id" => $bug_report->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -27,13 +29,15 @@ class BugReportLog
      */
     public function updated(BugReport $bug_report): void
     {
-        ActivityLog::create([
-            "action" => "update",
-            "subject_type" => "bug_report",
-            "subject_id" => $bug_report->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "update",
+                "subject_type" => "bug_report",
+                "subject_id" => $bug_report->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -41,12 +45,14 @@ class BugReportLog
      */
     public function deleted(BugReport $bug_report): void
     {
-        ActivityLog::create([
-            "action" => "delete",
-            "subject_type" => "bug_report",
-            "subject_id" => $bug_report->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "delete",
+                "subject_type" => "bug_report",
+                "subject_id" => $bug_report->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 }

@@ -15,63 +15,63 @@ class TestTypeSeeder extends Seeder
     {
         TestType::insert([
             [
-                'name' => 'unit-test',
+                'test_type' => 'unit-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'integration-test',
+                'test_type' => 'integration-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'functional-test',
+                'test_type' => 'functional-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'acceptance-test',
+                'test_type' => 'acceptance-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'end-to-end-test',
+                'test_type' => 'end-to-end-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'smoke-test',
+                'test_type' => 'smoke-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'regression-test',
+                'test_type' => 'regression-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'performance-test',
+                'test_type' => 'performance-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'load-test',
+                'test_type' => 'load-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'stress-test',
+                'test_type' => 'stress-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'usability-test',
+                'test_type' => 'usability-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'security-test',
+                'test_type' => 'security-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'compatibility-test',
+                'test_type' => 'compatibility-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'exploratory-test',
+                'test_type' => 'exploratory-test',
                 'is_custom' => false,
             ],
             [
-                'name' => 'a/b-test',
+                'test_type' => 'a/b-test',
                 'is_custom' => false,
             ],
         ]);

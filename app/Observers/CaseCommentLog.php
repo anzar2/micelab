@@ -13,13 +13,15 @@ class CaseCommentLog
      */
     public function created(CaseComment $case_comment): void
     {
-        ActivityLog::create([
-            "action" => "create",
-            "subject_type" => "case_comment",
-            "subject_id" => $case_comment->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "create",
+                "subject_type" => "case_comment",
+                "subject_id" => $case_comment->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -27,13 +29,15 @@ class CaseCommentLog
      */
     public function updated(CaseComment $case_comment): void
     {
-        ActivityLog::create([
-            "action" => "update",
-            "subject_type" => "case_comment",
-            "subject_id" => $case_comment->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "update",
+                "subject_type" => "case_comment",
+                "subject_id" => $case_comment->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 
     /**
@@ -41,12 +45,14 @@ class CaseCommentLog
      */
     public function deleted(CaseComment $case_comment): void
     {
-        ActivityLog::create([
-            "action" => "delete",
-            "subject_type" => "case_comment",
-            "subject_id" => $case_comment->id,
-            "by" => Auth::id(),
-            "when" => now()
-        ]);
+        if (Auth::check()) {
+            ActivityLog::create([
+                "action" => "delete",
+                "subject_type" => "case_comment",
+                "subject_id" => $case_comment->id,
+                "by" => Auth::id(),
+                "when" => now()
+            ]);
+        }
     }
 }

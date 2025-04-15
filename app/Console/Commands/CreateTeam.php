@@ -30,9 +30,9 @@ class CreateTeam extends Command
         try {
             $team_arg = $this->argument('team_name');
             $team = Team::create([
-                'name' => $team_arg,
+                'team_name' => $team_arg,
             ]);
-            $this->info('Team created successfully: ' . $team->name);
+            $this->info('Team created successfully: ' . $team->team_name);
         }
          catch (\Exception $e) {
             \Artisan::call("db:wipe", ["--force"=> true]);

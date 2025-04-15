@@ -41,8 +41,8 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $project = Project::create([
-                    'name' => __('seeder.project.name'),
-                    'description' => __('seeder.project.description'),
+                    'project_name' => __('seeder.project.name'),
+                    'project_description' => __('seeder.project.description'),
                 ]);
 
                 UsersProjects::create([
@@ -56,15 +56,15 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $module = ProjectModule::create([
-                    'name' => __('seeder.module.name'),
+                    'module_name' => __('seeder.module.name'),
                     'project_id' => $project->id,
                     'color' => '#ff0000',
                 ]);
 
                 $requirement = ProjectRequirement::create([
-                    'name' => __('seeder.task.name'),
+                    'requirement_name' => __('seeder.task.name'),
                     'module_id' => $module->id,
-                    'description' => __('seeder.task.description'),
+                    'requirement_description' => __('seeder.task.description'),
                     'project_id' => $project->id,
                     'expected_flow' => __('seeder.task.expected_flow'),
                 ]);
@@ -75,8 +75,8 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $testCase = TestCase::create([
-                    'title' => __('seeder.testCase.title'),
-                    'description' => __('seeder.testCase.description'),
+                    'case_title' => __('seeder.testCase.title'),
+                    'case_description' => __('seeder.testCase.description'),
                     'steps' => __('seeder.testCase.steps'),
                     'obtained_result' => __('seeder.testCase.obtained_result'),
                     'test_comments' => __('seeder.testCase.test_comments'),
@@ -88,26 +88,26 @@ class ExampleDataSeeder extends Seeder
                 ]);
 
                 $comment_1 = CaseComment::create([
-                    'comment' => __('seeder.testCaseComment.comment_1'),
+                    'case_comment' => __('seeder.testCaseComment.comment_1'),
                     'user_id' => $user_1->id,
                     'test_case_id' => $testCase->id,
                 ]);
 
                 $comment_2 = CaseComment::create([
-                    'comment' => __('seeder.testCaseComment.comment_2'),
+                    'case_comment' => __('seeder.testCaseComment.comment_2'),
                     'user_id' => $user_2->id,
                     'test_case_id' => $testCase->id,
                 ]);
 
                 $comment_3 = CaseComment::create([
-                    'comment' => __('seeder.testCaseComment.comment_3'),
+                    'case_comment' => __('seeder.testCaseComment.comment_3'),
                     'user_id' => $user_2->id,
                     'test_case_id' => $testCase->id,
                     'parent_id' => $comment_1->id
                 ]);
 
                 $comment_4 = CaseComment::create([
-                    'comment' => __('seeder.testCaseComment.comment_4'),
+                    'case_comment' => __('seeder.testCaseComment.comment_4'),
                     'user_id' => $user_1->id,
                     'test_case_id' => $testCase->id,
                     'parent_id' => $comment_2->id
@@ -115,8 +115,8 @@ class ExampleDataSeeder extends Seeder
 
 
                 $bug_report = BugReport::create([
-                    'title' => __('seeder.bugReport.title'),
-                    'description' => __('seeder.bugReport.description'),
+                    'bug_title' => __('seeder.bugReport.title'),
+                    'bug_description' => __('seeder.bugReport.description'),
                     'steps_to_reproduce' => __('seeder.bugReport.steps_to_reproduce'),
                     'requirement_id' => $requirement->id,
                     'project_id' => $project->id,
@@ -125,26 +125,26 @@ class ExampleDataSeeder extends Seeder
 
 
                 $bug_report_comment_1 = BugComments::create([
-                    'comment' => __('seeder.bugReportComment.comment_1'),
+                    'bug_comment' => __('seeder.bugReportComment.comment_1'),
                     'user_id' => $user_1->id,
                     'bug_report_id' => $bug_report->id,
                 ]);
 
                 $bug_report_comment_2 = BugComments::create([
-                    'comment' => __('seeder.bugReportComment.comment_2'),
+                    'bug_comment' => __('seeder.bugReportComment.comment_2'),
                     'user_id' => $user_2->id,
                     'bug_report_id' => $bug_report->id,
                 ]);
 
                 // Replies to bug report comments
                 BugComments::create([
-                    'comment' => __('seeder.bugReportComment.comment_3'),
+                    'bug_comment' => __('seeder.bugReportComment.comment_3'),
                     'user_id' => $user_1->id,
                     'bug_report_id' => $bug_report->id,
                     'parent_id' => $bug_report_comment_1->id
                 ]);
                 BugComments::create([
-                    'comment' => __('seeder.bugReportComment.comment_4'),
+                    'bug_comment' => __('seeder.bugReportComment.comment_4'),
                     'user_id' => $user_2->id,
                     'bug_report_id' => $bug_report->id,
                     'parent_id' => $bug_report_comment_2->id
