@@ -16,7 +16,7 @@ class UserObserver
             "user_id"=> $user->id,
             "theme"=> 'auto',
             'language'=> config('app.locale'),
-            'timezone'=> 417,
+            'timezone'=> 418,
         ]);
     }
 }

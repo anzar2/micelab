@@ -45,8 +45,7 @@ return new class extends Migration {
         });
 
         Schema::create("user_preferences", function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUuid('user_id')->primary()->constrained('users');
 
             $table->string('theme')->nullable();
             $table->foreign('theme')->references('code')->on('themes')->onDelete('set null');

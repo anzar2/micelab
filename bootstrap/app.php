@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'isProjectMember' => \App\Http\Middleware\UserIsMember::class,
             'csrf' => Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
             'protectOwnership' => \App\Http\Middleware\ProtectOwnership::class,
+            'checkLanguage'=> \App\Http\Middleware\CheckLanguage::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

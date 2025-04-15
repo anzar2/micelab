@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -9,6 +10,9 @@ class UserPreference extends Model
 {
     protected $table = "user_preferences";
     public $timestamps = false;
+    public $incrementing = false;
+    protected $primaryKey = "user_id";
+    
     protected $fillable = [
         'user_id',
         'theme',
