@@ -37,6 +37,6 @@ class LoginController extends Controller
             return redirect("/app");
         }
 
-        return redirect()->route("login")->with("error","Invalid credentials");
+        return redirect()->route("login")->with("error",__("auth.failed"));
     }
 }

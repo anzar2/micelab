@@ -41,7 +41,10 @@ class RequirementsController extends Controller
             ProjectRequirement::class,
             $validator,
             $data,
-            "Requirement created succesfully."
+            
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.requirement"),
+            ])
         );
     }
 
@@ -59,7 +62,9 @@ class RequirementsController extends Controller
             RequirementAssignees::class,
             $validator,
             $data,
-            "User"
+            __("messages.entity_actions.added", [
+                "Entity" => __("entities.user"),
+            ])
         );
     }
 
@@ -97,7 +102,9 @@ class RequirementsController extends Controller
             $requirement->id,
             $validator,
             $data,
-            "Requirement updated succesfully"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.requirement"),
+            ])
         );
     }
 
@@ -106,7 +113,9 @@ class RequirementsController extends Controller
         return $this->writeService->trash(
             ProjectRequirement::class,
             $requirement->id,
-            "Requirement trashed successfully"
+            __("messages.entity_actions.trashed", [
+                "Entity" => __("entities.requirement"),
+            ])
         );
     }
     public function recover(Project $project, ProjectRequirement $requirement)
@@ -114,7 +123,9 @@ class RequirementsController extends Controller
         return $this->writeService->recover(
             ProjectRequirement::class,
             $requirement->id,
-            "Requirement recovered successfully"
+            __("messages.entity_actions.restored", [
+                "Entity" => __("entities.requirement"),
+            ])
         );
     }
     public function delete(Project $project, ProjectRequirement $requirement)
@@ -122,7 +133,9 @@ class RequirementsController extends Controller
         return $this->writeService->delete(
             ProjectRequirement::class,
             $requirement->id,
-            "Requirement deleted successfully"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.requirement"),
+            ])
         );
     }
 }

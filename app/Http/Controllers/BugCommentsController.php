@@ -59,7 +59,9 @@ class BugCommentsController extends Controller
             $comment->id,
             $validator,
             $data,
-            "Comment updated"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.comment")
+            ])
         );
     }
 
@@ -73,7 +75,9 @@ class BugCommentsController extends Controller
         return $this->writeService->delete(
             BugComments::class,
             $comment->id,
-            "Comment updated"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.comment")
+            ])
         );
     }
 }

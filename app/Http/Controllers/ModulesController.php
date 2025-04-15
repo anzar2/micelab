@@ -45,7 +45,9 @@ class ModulesController extends Controller
             ProjectModule::class,
             $validator,
             $data,
-            "Module created successfully"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.module"),
+            ])
         );
     }
 
@@ -72,7 +74,9 @@ class ModulesController extends Controller
             $module->id,
             $validator,
             $data,
-            "Module updated successfully"
+            __("messages.entity_actions.update", [
+                "Entity" => __("entities.module"),
+            ])
         );
     }
 
@@ -81,7 +85,9 @@ class ModulesController extends Controller
         return $this->writeService->trash(
             ProjectModule::class,
             $module->id,
-            "Module trashed successfuly"
+            __("messages.entity_actions.trashed", [
+                "Entity" => __("entities.module"),
+            ])
         );
     }
 
@@ -90,7 +96,9 @@ class ModulesController extends Controller
         return $this->writeService->recover(
             ProjectModule::class,
             $module->id,
-            "Module recovered successfuly"
+            __("messages.entity_actions.restored", [
+                "Entity" => __("entities.module"),
+            ])
         );
     }
 
@@ -99,7 +107,9 @@ class ModulesController extends Controller
         return $this->writeService->delete(
             ProjectModule::class,
             $module->id,
-            "Module deleted successfuly"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.module"),
+            ])
         );
     }
 }

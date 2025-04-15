@@ -19,7 +19,7 @@ class MeController extends Controller
     {
         $data = $request->only(["display_name", "email"]);
         $validator = \Validator::make($data, [
-            "display_name" => "required|string",
+            "display_name" => "required|string|filled",
             "email" => "email|nullable",
         ]);
 
@@ -28,7 +28,7 @@ class MeController extends Controller
             $request->user()->id,
             $validator,
             $data,
-            "Your data has been updated"
+            __("messages.user_data_updated"),
         );
     }
     public function update_preferences(Request $request)
@@ -48,11 +48,13 @@ class MeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return JsonResponse::badRequest("Form has been rejected", $validator->errors()->all());
+            return JsonResponse::badRequest(__("messages.errors.form_rejected"), $validator->errors()->all());
         }
 
         $user_preferences = UserPreference::where("user_id", $request->user()->id)->first();
         $user_preferences->update($data);
-        return JsonResponse::ok("Your preferences has been updated");
+        return JsonResponse::ok(
+            __("messages.preferences_updated"),
+        );
     }
 }

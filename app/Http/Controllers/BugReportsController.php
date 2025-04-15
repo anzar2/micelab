@@ -43,7 +43,9 @@ class BugReportsController extends Controller
             BugReport::class,
             $validator,
             $data,
-            "Bug Report created"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.bug_report"),
+            ])
         );
     }
 
@@ -70,7 +72,9 @@ class BugReportsController extends Controller
             $bugReport->id,
             $validator,
             $data,
-            "Bug Report updated"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.bug_report"),
+            ])
         );
     }
 
@@ -79,7 +83,9 @@ class BugReportsController extends Controller
         return $this->writeService->delete(
             BugReport::class,
             $bugReport->id,
-            "Bug Report deleted"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.deleted"),
+            ])
         );
     }
 }

@@ -8,15 +8,13 @@ use Illuminate\Http\Request;
 
 class UpdateRoleController extends Controller
 {
-    public function update_role(Request $request, $user_id)
+    public function update_role(Request $request, User $user)
     {
         // This route should be protected with ProtectOwnership
         
-        $target_user = User::find($user_id);
-        
         $data = [
             "global_role" => $request->input("global_role"),
-            "user_id" => $user_id
+            "user_id" => $user->id
         ];
 
         $validator = \Validator::make($data, [
@@ -27,10 +25,12 @@ class UpdateRoleController extends Controller
         return $this->writeService->
             update(
                 User::class,
-                $target_user->id,
+                $user->id,
                 $validator,
                 $data,
-                "Role updated for ". $target_user->display_name ." successfully"
+                __("messages.entity_actions.role_updated", [
+                    "Entity" => $user->display_name
+                ])  
             );
     }
 

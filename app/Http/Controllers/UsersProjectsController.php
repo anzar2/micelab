@@ -46,7 +46,9 @@ class UsersProjectsController extends Controller
             UsersProjects::class,
             $validator,
             $data,
-            "User added to project successfully"
+            __("messages.entity_actions.added", [
+                "Entity" => __("entities.user"),
+            ])
         );
     }
 
@@ -74,7 +76,11 @@ class UsersProjectsController extends Controller
 
         $projects_user->delete();
 
-        return JsonResponse::ok("User removed from project successfully");
+        return JsonResponse::ok(
+            __("messages.entity_actions.removed", [
+                "Entity" => __("entities.user"),
+            ])
+        );
     }
 
     public function clean(Request $request, $project_id)
@@ -83,6 +89,8 @@ class UsersProjectsController extends Controller
         UsersProjects::where("project_id", $project_id)
             ->where("user_id", "!=", $user_id)
             ->delete();
-        return JsonResponse::ok("All users removed from project successfully");
+        return JsonResponse::ok(
+            __("messages.users_deleted_from_project")
+        );
     }
 }

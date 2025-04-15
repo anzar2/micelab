@@ -12,15 +12,15 @@
         @csrf
         <h1>Micelab Login</h1>
         <fieldset>
-            <label for="identifier">Email or username</label>
-            <input type="text" name="identifier" placeholder="Email or username">
+            <label for="identifier">{{ __("forms.login.identifier.label") }}</label>
+            <input type="text" name="identifier" placeholder="{{ __("forms.login.identifier.placeholder") }}">
             @error('identifier')
                 <small style="color: red;">{{ $message }}</small>
             @enderror
         </fieldset>
         <fieldset>
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Password">
+            <label for="password">{{ __("forms.login.password.label") }}</label>
+            <input type="password" name="password" placeholder="{{ __("forms.login.password.placeholder") }}">
             @error('password')
                 <small style="color: red;">{{ $message }}</small>
             @enderror
@@ -29,7 +29,7 @@
             <strong style="color: red;">{{ session("error") }}</strong>
         @endif
         <p style="background-color: yellow;">UI is under development</p>
-        <button class="btn-primary">Login</button>
+        <button class="btn-primary">{{ __("forms.login.submit.label") }}</button>
     </form>
 </body>
 

@@ -68,7 +68,9 @@ class UsersController extends Controller
             User::class,
             $validator,
             $data,
-            "User created successfully"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.user")
+            ])
         );
     }
 
@@ -92,7 +94,9 @@ class UsersController extends Controller
             $user->id,
             $validator,
             $data,
-            "User updated successfully"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.user")
+            ])
         );
     }
 
@@ -103,7 +107,9 @@ class UsersController extends Controller
         return $this->writeService->trash(
             User::class,
             $user->id,
-            "User trashed successfully"
+            __("messages.entity_actions.trashed", [
+                "Entity" => __("entities.user")
+            ])
         );
     }
 
@@ -112,7 +118,9 @@ class UsersController extends Controller
         return $this->writeService->recover(
             User::class,
             $user->id,
-            "User recovered successfully"
+            __("messages.entity_actions.restored", [
+                "Entity" => __("entities.user")
+            ])
         );
     }
 
@@ -123,8 +131,9 @@ class UsersController extends Controller
         return $this->writeService->delete(
             User::class,
             $user->id,
-            "User deleted permanently",
-            ["user_id" => $user->id]
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.user")
+            ])
         );
     }
 }

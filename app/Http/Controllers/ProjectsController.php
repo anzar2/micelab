@@ -56,7 +56,9 @@ class ProjectsController extends Controller
             Project::class,
             $validator,
             $data,
-            "Project created successfully"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.project"),
+            ])
         );
     }
     
@@ -74,7 +76,10 @@ class ProjectsController extends Controller
             $project->id,
             $validator,
             $data,
-            "Project updated successfully"
+            __("messages.entity_actions.update", [
+                "Entity" => __("entities.project"),
+            ])
+
         );
     }
 
@@ -83,7 +88,9 @@ class ProjectsController extends Controller
         return $this->writeService->trash(
             Project::class,
             $project->id,
-            "Project trashed successfully"
+            __("messages.entity_actions.trashed", [
+                "Entity" => __("entities.project"),
+            ])
         );
     }
 
@@ -92,7 +99,9 @@ class ProjectsController extends Controller
         return $this->writeService->recover(
             Project::class,
             $project->id,
-            "Project recovered successfully"
+            __("messages.entity_actions.restored", [
+                "Entity" => __("entities.project"),
+            ])
         );
     }
 
@@ -101,7 +110,9 @@ class ProjectsController extends Controller
         return $this->writeService->delete(
             Project::class,
             $project->id,
-            "Project deleted permanently"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.project"),
+            ])
         );
     }
 }

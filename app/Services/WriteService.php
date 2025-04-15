@@ -24,7 +24,7 @@ class WriteService
     public function create($model, Validator $validator, $data, $message, $details=null)
     {
         if ($validator->fails()) {
-            return JsonResponse::badRequest("Form has been rejected", $validator->errors()->all());
+            return JsonResponse::badRequest(__("messages.errors.form_rejected"), $validator->errors()->all());
         }
 
         /** @var Model $instance */
@@ -38,7 +38,7 @@ class WriteService
     public function update($model, $target_id, $validator, $data, $message, $details = null)
     {
         if ($validator->fails()) {
-            return JsonResponse::badRequest("Form has been rejected", $validator->errors()->all());
+            return JsonResponse::badRequest(__("messages.errors.form_rejected"), $validator->errors()->all());
         }
         /** @var Model $instance */
         $instance = new $model;
@@ -59,11 +59,11 @@ class WriteService
         $target = $instance::find($target_id);
 
         if (!$target) {
-            return JsonResponse::notFound("Record not found");
+            return JsonResponse::notFound(__("messages.errors.record_not_found"));
         }
 
         if (!in_array(Trashable::class, class_uses($instance))) {
-            return JsonResponse::badRequest("This model is not trashable");
+            return JsonResponse::badRequest(__("messages.errors.form_rejected"));
         }
         $target->trash();
         return JsonResponse::ok($message, $details);
@@ -76,11 +76,11 @@ class WriteService
         $target = $instance::find($target_id);
 
         if (!$target) {
-            return JsonResponse::notFound("Record not found");
+            return JsonResponse::notFound(__("messages.errors.record_not_found"));
         }
 
         if (!in_array(Trashable::class, class_uses($instance))) {
-            return JsonResponse::badRequest("This model is not trashable");
+            return JsonResponse::badRequest(__("messages.errors.model_not_trashable"));
         }
         $target->recover();
         return JsonResponse::ok($message, $details);
@@ -93,7 +93,7 @@ class WriteService
         $target = $instance::find($target_id);
 
         if (!$target) {
-            return JsonResponse::notFound("Record not found");
+            return JsonResponse::notFound(__("messages.errors.record_not_found"));
         }
         $target->delete();
         return JsonResponse::ok($message, $details);

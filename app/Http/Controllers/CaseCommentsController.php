@@ -40,7 +40,9 @@ class CaseCommentsController extends Controller
             CaseComment::class,
             $validator,
             $data,
-            "Comment added"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.comment"),
+            ])
         );
     }
 
@@ -62,7 +64,9 @@ class CaseCommentsController extends Controller
             $comment->id,
             $validator,
             $data,
-            "Comment updated"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.comment"),
+            ])
         );
     }
 
@@ -77,7 +81,9 @@ class CaseCommentsController extends Controller
         return $this->writeService->delete(
             CaseComment::class,
             $comment->id,
-            "Comment updated"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.comment"),
+            ])
         );
     }
 

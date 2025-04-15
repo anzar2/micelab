@@ -65,7 +65,9 @@ class TestCaseController extends Controller
             TestCase::class,
             $validator,
             $data,
-            "Test Cases Added"
+            __("messages.entity_actions.created", [
+                "Entity" => __("entities.test_case")
+            ])
         );
 
     }
@@ -106,7 +108,9 @@ class TestCaseController extends Controller
             $requirement->id,
             $validator,
             $data,
-            "Test case updated"
+            __("messages.entity_actions.updated", [
+                "Entity" => __("entities.test_case")
+            ])
         );
     }
 
@@ -115,7 +119,9 @@ class TestCaseController extends Controller
         return $this->writeService->delete(
             TestCase::class,
             $requirement->id,
-            "Test case deleted"
+            __("messages.entity_actions.deleted", [
+                "Entity" => __("entities.test_case")
+            ])
         );
     }
 
@@ -124,7 +130,9 @@ class TestCaseController extends Controller
         return $this->writeService->trash(
             TestCase::class,
             $test_case->id,
-            "Test Case trashed"
+            __("messages.entity_actions.trashed", [
+                "Entity" => __("entities.test_case")
+            ])
         );
     }
 
@@ -133,7 +141,9 @@ class TestCaseController extends Controller
         return $this->writeService->recover(
             TestCase::class,
             $test_case->id,
-            "Test Case recovered"
+            __("messages.entity_actions.restored", [
+                "Entity" => __("entities.test_case")
+            ])
         );
     }
 
@@ -141,14 +151,22 @@ class TestCaseController extends Controller
     {
         $test_case->published = true;
         $test_case->save();
-        
-        return JsonResponse::ok("Test Case is published");
+
+        return JsonResponse::ok(
+            __("messages.entity_actions.published", [
+                "Entity" => __("entities.test_case")
+            ])
+        );
     }
     public function unpublish(Project $project, ProjectRequirement $requirement, TestCase $test_case)
     {
         $test_case->published = false;
         $test_case->save();
-        
-        return JsonResponse::ok("Test Case is unpublished");
+
+        return JsonResponse::ok(
+            __("messages.entity_actions.published", [
+                "Entity" => __("entities.test_case")
+            ])
+        );
     }
 }
