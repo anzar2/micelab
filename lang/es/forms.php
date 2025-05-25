@@ -3,14 +3,16 @@
 return [
     "login" => [
         "identifier" => [
-            "label" => "Nombre de usuario o correo electrónico",
-            "placeholder" => "Nombre de usuario o correo electrónico",
+            "label" => "Identificador",
+            "placeholder" => "Usuario o correo electrónico",
             "help" => "Introduce tu nombre de usuario o correo electrónico",
         ],
         "password"=> [
             "label"=> "Contraseña",
             "placeholder"=> "Contraseña",
             "help"=> "Introduce tu contraseña",
+            "show" => "Mostrar contraseña",
+            "hide" => "Ocultar contraseña"
         ],
         "remember_me"=> [
             "label"=> "Recuérdame",

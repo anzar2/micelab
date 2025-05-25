@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+    'failed' => 'Las credenciales no son correctas, o no existe',
     'password' => 'La contrase a proporcionada es incorrecta.',
     'throttle' => 'Demasiados intentos de inicio de sesi n. Por favor, intentelo de nuevo en :seconds segundos.',
 

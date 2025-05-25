@@ -11,6 +11,8 @@ return [
             "label"=> "Password",
             "placeholder"=> "Password",
             "help"=> "Enter your password",
+            "show" => "Show password",
+            "hide" => "Hide password"
         ],
         "remember_me"=> [
             "label"=> "Remember me",

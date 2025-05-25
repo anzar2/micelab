@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        return view("login");
+        $team = Team::first();
+        return view("login", ['team' => $team]);
     }
     /**
      * I know it could be more elegant, but it works.
@@ -24,7 +26,7 @@ class LoginController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('login')->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $isEmail = preg_match("/^[^\s@]+@[^\s@]+\.[^\s@]+$/", $credentials["identifier"]);
