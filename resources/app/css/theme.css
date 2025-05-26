@@ -1,13 +1,25 @@
 [data-theme="light"] {
     @theme {
-        --color-primary: theme(colors.purple.700);
-        --color-secondary: theme(colors.purple.100);
-        --color-tertiary: theme(colors.purple.600)
-    }   
-    
+        --color-primary:    theme(colors.purple.700);
+        --color-secondary:  theme(colors.purple.100);
+        --color-tertiary:   theme(colors.purple.600);
+        --color-gray:       theme(colors.gray.600);
+    }
 
+    .container-gap {
+        @apply gap-1;
+    }
+
+    .container-padding {
+        @apply p-1;
+    }
+
+    .btn, .input, .select, .textarea {
+        @apply rounded;
+    }
+    
     .input, .select, .textarea {
-        @apply w-full outline-1 -outline-offset-1 px-3 py-1 outline-gray-400;
+        @apply w-full outline-1 -outline-offset-1 px-3 py-1 outline-gray-300;
         @apply focus:outline-purple-700 focus:outline-2;
     }
 
@@ -16,15 +28,16 @@
     }
 
     .btn {
-        @apply rounded-none;
-        @apply flex duration-100 w-full px-3 p-1 font-medium gap-2 items-center select-none;
+        
+        @apply flex duration-100 px-3 p-1 font-medium gap-2 items-center select-none;
+        
         &:disabled {
             @apply bg-gray-400 text-gray-100 cursor-not-allowed;
         }
     }
 
     .link {
-        @apply text-gray-500 duration-200;
+        @apply text-gray duration-200;
         @apply hover:text-purple-700;
     }
 
@@ -51,8 +64,6 @@
     h5 { @apply text-lg }
     h6 { @apply text-base }
 
-    
-    
     .btn-primary {
         @apply bg-primary text-white;
         @apply hover:bg-purple-600;
@@ -60,9 +71,28 @@
     }
 
     .btn-clear {
-        @apply text-gray-500;
+        @apply text-gray;
         @apply hover:text-purple-700 hover:bg-purple-100;
         @apply active:bg-purple-200;
+    }
+
+    .btn-tab {
+         & {
+            * { @apply text-purple-700; }
+        }
+        @apply text-gray bg-white relative;
+        @apply hover:text-primary;
+    }
+
+    .btn-tab-selected {
+         & {
+            * { @apply text-purple-700; }
+        }
+        @apply text-purple-700 bg-white relative;
+        
+        &::before {
+            @apply content-[""] h-[2px] w-full bg-purple-700 left-0 bottom-[-5px] absolute;
+        }
     }
 
     .btn-clear-selected {
@@ -71,9 +101,6 @@
         }
         @apply text-purple-700 bg-purple-100 relative;
         @apply active:bg-purple-200;
-        &::before {
-            @apply content-[""] h-full w-[2px] bg-purple-700 left-0 top-0 absolute;
-        }
     }
 
     .btn-outline {
@@ -90,5 +117,9 @@
     
     .background-secondary {
         @apply bg-gray-100;
+    }
+
+    .background-primary {
+        @apply bg-white;
     }
 }

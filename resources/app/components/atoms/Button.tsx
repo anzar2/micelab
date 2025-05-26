@@ -3,8 +3,8 @@ import React from 'react'
 export interface ButtonProps {
     label?: string,
     icon?: React.ReactElement
-    variant?: "primary" | "clear" | "clear-selected" | "outline" | "danger",
-    onClick?: () => {}
+    variant?: "primary" | "clear" | "clear-selected" | "outline" | "danger" | "tab" | "tab-selected",
+    onClick?: any
 }
 
 function Button(props: ButtonProps) {

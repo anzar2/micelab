@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang={{ config('app.locale') }} data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,6 @@
     @vite(['resources/app/css/app.css', 'resources/app/main.tsx'])
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root" class="bg-gray-100"></div>
 </body>
 </html>

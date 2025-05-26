@@ -26,14 +26,15 @@
                     </fieldset>
                     <fieldset>
                         <label for="password">{{ __("forms.login.password.label") }}</label>
-                        <input class="input" id="password" placeholder="{{ __("forms.login.password.label") }}" type="password"
-                            name="password">
-                        <button id="show-password" class="link text-start"></button>
+                        <input class="input" id="password" placeholder="{{ __("forms.login.password.label") }}"
+                            type="password" name="password">
+                        <button id="show-password" type="button" class="link text-start"></button>
                         @error('password')
                             <small style="color: red;">{{ $message }}</small>
                         @enderror
                     </fieldset>
-                    <button class="btn mt-5 btn-primary w-full justify-center">{{ __("forms.login.submit.label") }}</button>
+                    <button type="submit"
+                        class="btn mt-5 btn-primary w-full justify-center">{{ __("forms.login.submit.label") }}</button>
                     @if(session("error"))
                         <span style="color: red;">{{ session("error") }}</span>
                     @endif
@@ -50,20 +51,19 @@
         </section>
     </div>
     <script>
-
-        let button = document.getElementById("show-password")
-        let passwordInput = document.getElementById("password")
-        let showPassword = false
-
         document.addEventListener('DOMContentLoaded', () => {
-            button.innerText = showPassword
+            const button = document.getElementById("show-password");
+            const passwordInput = document.getElementById("password");
+            let showPassword = false;
+
+            button.innerText = showPassword;
                 ? @json(__('forms.login.password.hide'))
                 : @json(__('forms.login.password.show'))
 
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 showPassword = !showPassword;
-                
+
                 if (showPassword) {
                     button.innerText = @json(__('forms.login.password.hide'));
                     passwordInput.setAttribute("type", "text");

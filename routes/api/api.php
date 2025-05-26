@@ -18,6 +18,7 @@ Route::fallback(function () {
 // Note: I recommend you to check ./app/Services/WriteService.php before adding new endpoints, may be useful
 Route::middleware(["auth", "checkLanguage"])->group(function () {
     include_once __DIR__ ."/endpoints/projects.php";
+    include_once __DIR__ ."/endpoints/teams.php";
     include_once __DIR__ ."/endpoints/users.php";
     include_once __DIR__ ."/endpoints/modules.php";
     include_once __DIR__ ."/endpoints/requirements.php";
