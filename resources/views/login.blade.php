@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(["resources/css/app.css"])
-    <title>Micelab Login</title>
+    @vite(["resources/css/app.css", "resources/js/app.js"])
+    <title>{{ $team->team_name }} | Micelab</title>
 </head>
 
 <body>
-    <main class="h-screen w-screen grid grid-cols-2">
+    <main class="h-screen w-screen grid grid-cols-2 overflow-hidden">
         <section class="flex items-center justify-center">
             <div class="flex flex-col gap-6 w-[18rem]">
                 @if (session("error"))
@@ -19,7 +19,7 @@
                 @endif
                 <div>
                     <h1>{{ $team->team_name }}</h1>
-                    <span>Bienvenido</span>
+                    <span>Micelab</span>
                 </div>
                 <form action="{{ route('login.attempt') }}" method="POST">
                     @csrf
@@ -32,29 +32,30 @@
                                     placeholder="{{ __("forms.login.identifier.placeholder") }}">
                             </div>
                         </div>
+                        @error("identifier") <span class="text-sm text-red-500">{{ $message }}</span> @enderror
                     </fieldset>
                     <fieldset class="bp5-form-group" f="password">
                         <label for="identifier" class="bp5-label">{{ __("forms.login.password.label") }}</label>
                         <div class="bp5-form-content">
                             <div class="bp5-input-group">
                                 <span class="bp5-icon bp5-icon-lock"></span>
-                                <input type="password" name="password" class="bp5-input" placeholder="••••••••••••••">
-                                <button class="bp5-button bp5-minimal bp5-icon-eye-open" type="button" autocomplete="false"></button>
+                                <input id="pwd" type="password" name="password" class="bp5-input" placeholder="••••••••••••••">
+                                <button id="toggle-pwd" class="bp5-button bp5-minimal bp5-icon-eye-open" type="button" autocomplete="false"></button>
                             </div>
+                            @error("password") <span class="text-sm text-red-500">{{ $message }}</span> @enderror
                         </div>
                     </fieldset>
-
                     <button class="bp5-button w-full bp5-intent-primary">{{ __("forms.login.submit.label") }}</button>
                 </form>
                 <div class="bp5-divider"></div>
                 <div class="flex flex-col gap-2 items-center">
                     <a href="">Recuperar contraseña</a>
-                    <a href="https://github.com/anzar2/micelab/wiki#privacy-and-security" target="_blank">Seguridad y
-                        Privacidad</a>
+                    <a href="https://github.com/anzar2/micelab/wiki#privacy-and-security" target="_blank">Seguridad y Privacidad</a>
                 </div>
             </div>
         </section>
-        <section class="bg-purple-500">
+        <section class="">
+            <img src="https://picsum.photos/720" class="object-fill w-full" alt="">
         </section>
     </main>
 </body>

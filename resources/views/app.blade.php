@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang={{ config("app.locale") }}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    @viteReactRefresh
+    @vite(["resources/css/app.css", "resources/app/main.tsx"])
+    <title></title>
 </head>
 <body>
-    <h1>Hello, {{ Auth::user()->display_name }}</h1>
-    <p>Imagine a Beautiful React application here</p>
-    <p>It's under development</p>
-    <img src="https://tenor.com/view/bocchi-the-rock-bocchi-gif-26931504.gif" alt="">
+    <div id="root"></div>
 </body>
 </html>
