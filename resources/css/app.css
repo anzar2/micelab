@@ -14,6 +14,6 @@ input::-ms-reveal, input::-ms-clear {
     display: none;
 }
 
-.bp5-button:focus {
-  @apply outline-none;
+.bp5-button:focus, .bp5-tab {
+  @apply outline-none select-none;
 }
