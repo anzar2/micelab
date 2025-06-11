@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\LoginController;
 
 // All API routes consumed by Micelab
@@ -11,9 +12,8 @@ Route::redirect("/", "/app");
 
 // Only load Micelab application if user is authenticated
 Route::middleware(["auth"])->group(function () {
-    Route::view("/app", "app");
-    Route::view("/app/{any}", "app")
-        ->where("any", ".*");
+    Route::get("/app", [AppController::class,"index"])->name("");
+    Route::get("/app/{any}", [AppController::class, "index"])->where("any", ".*");
 });
 
 // Login

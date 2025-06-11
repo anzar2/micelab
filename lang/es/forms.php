@@ -3,7 +3,7 @@
 return [
     "login" => [
         "identifier" => [
-            "label" => "Nombre de usuario o correo electrónico",
+            "label" => "Identificador",
             "placeholder" => "Nombre de usuario o correo electrónico",
             "help" => "Introduce tu nombre de usuario o correo electrónico",
         ],

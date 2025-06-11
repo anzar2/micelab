@@ -192,7 +192,7 @@ return [
     */
 
     'attributes' => [
-        'identifier' => 'Correo o nombre de usuario',
+        'identifier' => 'Identificador',
         'email' => 'Correo electrónico',
         'username' => 'Nombre de usuario',
         'password' => 'Contraseña',

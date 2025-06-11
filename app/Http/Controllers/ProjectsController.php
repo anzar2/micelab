@@ -16,11 +16,9 @@ class ProjectsController extends Controller
 
         $user = $request->user();
         $user_role = $user->global_role;
-        $page = $request->query("page", 1);
 
         if (in_array($user_role, ["owner", "admin"])) {
-            $projects = Project::where('deleted', false)
-                ->paginate(perPage: 20, page: $page);
+            $projects = Project::where('deleted', false);
         } else {
             $projects = UsersProjects::with(['project'])
                 ->where("user_id", $user->id)
