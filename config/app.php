@@ -124,5 +124,5 @@ return [
     ],
 
     'example_insert' => (bool) env('EXAMPLE_INSERT', false),
-
+    'version' => "1.0.0",
 ];
